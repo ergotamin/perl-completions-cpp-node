@@ -11,6 +11,7 @@
 				"-Wall",
 				"-Wno-deprecated",
 				"-Wno-deprecated-declarations",
+				"-Wno-cast-function-type",
 				"-O2",
 				"-Ofast",
 				"-pthread"
