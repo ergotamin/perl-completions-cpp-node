@@ -10,10 +10,6 @@ public:
     {
 #       if defined(BUILDING_NODE_EXTENSION)
         return "native";
-#       elif defined(EMSCRIPTEN)
-        return "asm.js";
-#       else
-        return "unknown";
 #       endif
     }
 };

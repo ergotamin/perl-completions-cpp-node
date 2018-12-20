@@ -10,6 +10,7 @@
 			"cflags": [
 				"-Wall",
 				"-Wno-deprecated",
+				"-Wno-deprecated-declarations",
 				"-O2",
 				"-Ofast",
 				"-pthread"
