@@ -1,10 +1,15 @@
 {
   "name": "perl-language-server",
   "version": "0.1.0",
-  "description": "LanguageServer implementation for Perl. Nativly compiled Node-Module written in C++.",
+  "description": "LanguageServerInterface implementation for Perl. Nativly compiled Node-Module written in C++.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "configure": "autogypi --init-gyp -r out -p nbind -s src/index.cc",
+    "make:node": "node-gyp -C out configure build",
+    "make:types": "ndts out > index.d.ts",
+    "make:all": "(npm run make:node && npm run make:types)",
+    "make:install": "copyasm out .",
+    "make:clean": "rm -rf out/*"
   },
   "repository": {
     "type": "git",
@@ -15,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/ergotamin/perl-language-server/issues"
   },
-  "homepage": "https://github.com/ergotamin/perl-language-server#readme"
+  "homepage": "https://github.com/ergotamin/perl-language-server#readme",
+  "dependencies": {
+    "nbind": "^0.3.15",
+    "autogypi": "^0.2.2",
+    "node-gyp": "^3.8.0"
+  }
 }
