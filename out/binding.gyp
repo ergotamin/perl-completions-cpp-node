@@ -12,6 +12,7 @@
 				"-Wno-deprecated",
 				"-Wno-deprecated-declarations",
 				"-Wno-cast-function-type",
+				"-Wno-class-memaccess",
 				"-O2",
 				"-Ofast",
 				"-pthread"

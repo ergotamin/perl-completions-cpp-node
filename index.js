@@ -1,4 +1,4 @@
-const nbind = require("nbind");
-/* @module: default exporting syncronous
- * load of the language-server-module. */
-export const Library = nbind.init().lib;
+// init the library from lib-directory.
+const lib = require("nbind").init(__dirname).lib;
+// export lib
+module.exports = lib;
