@@ -1,4 +1,4 @@
-static std::array<std::string, 236>builtin_functions = {
+static std::string builtin_functions[236] = {
     "-A",               \
     "abs",              \
     "accept",           \
