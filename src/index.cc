@@ -1,15 +1,18 @@
 #include <string>
+#include <array>
 #include <iostream>
 
 #include "nbind/api.h"
 
-class Example {
+#include "builtin_functions.hh"
+
+class Data {
 public:
 
-    static std::string test()
+    static std::array<std::string> loadFunctions()
     {
 #       if defined(BUILDING_NODE_EXTENSION)
-        return "native";
+        return builtin_functions;
 #       endif
     }
 };
@@ -18,8 +21,8 @@ public:
 
 #ifdef NBIND_CLASS
 
-NBIND_CLASS(Example) {
-    method(test);
+NBIND_CLASS(Data) {
+    method(loadFunctions);
 }
 
 #endif
