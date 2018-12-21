@@ -1,4 +1,5 @@
 #include <string>
+#include <array>
 #include <iostream>
 
 #include "nbind/api.h"
@@ -8,7 +9,7 @@
 class Data {
 public:
 
-    static std::string[] loadFunctions()
+    static std::array<std::string, 236> loadFunctions()
     {
 #       if defined(BUILDING_NODE_EXTENSION)
         return builtin_functions;
