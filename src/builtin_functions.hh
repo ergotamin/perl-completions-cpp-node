@@ -1,4 +1,4 @@
-static std::array<std::string, 236> builtin_functions = {
+static std::array<std::string, 235> builtin_functions = {
     "-A",               \
     "abs",              \
     "accept",           \
@@ -233,7 +233,6 @@ static std::array<std::string, 236> builtin_functions = {
     "write",            \
     "-x",               \
     "-X",               \
-    "-z",               \
-    nullptr
+    "-z",
 };
 // reached end-of-file.
