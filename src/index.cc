@@ -9,7 +9,7 @@
 class Data {
 public:
 
-    static std::array<std::string> loadFunctions()
+    static std::array<std::string, 236> loadFunctions()
     {
 #       if defined(BUILDING_NODE_EXTENSION)
         return builtin_functions;
