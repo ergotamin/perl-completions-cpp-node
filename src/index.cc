@@ -1,9 +1,11 @@
 #include <string>
 #include <vector>
+#include <array>
 #include <iostream>
 
 #include "nbind/api.h"
 
+#define BUILDING_NODE_EXTENSION
 #if defined(BUILDING_NODE_EXTENSION)
 
 #include "perl_keywords.hh"
@@ -11,7 +13,7 @@
 class Perl {
 public:
 
-    static std::vector<std::string> functions(void)
+    static std::vector<std::array<std::string, 2> > functions(void)
     {
         return perl_functions;
     }

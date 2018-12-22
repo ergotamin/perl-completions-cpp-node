@@ -1,294 +1,263 @@
-// File-Handles
-static std::vector<std::string> perl_filehandles = {
-    "ARGV",    \
-    "STDERR",  \
-    "STDOUT",  \
-    "ARGVOUT", \
-    "STDIN",
+/* @{ */
+static std::vector<std::array<std::string,2> > perl_functions = {
+{"abs","<em>    abs VALUE\n    abs     Returns the absolute value of its argument. If VALUE is omitted,\n            uses $_.\n\n</em>"}, \
+{"accept","<em>    accept NEWSOCKET,GENERICSOCKET\n            Accepts an incoming socket connect, just as accept(2) does.\n            Returns the packed address if it succeeded, false otherwise. See\n            the example in \"Sockets: Client/Server Communication\" in\n            perlipc.\n\n</em>"}, \
+{"alarm","<em>    alarm SECONDS\n    alarm   Arranges to have a SIGALRM delivered to this process after the\n            specified number of wallclock seconds has elapsed. If SECONDS is\n            not specified, the value stored in $_ is used. (On some\n            machines, unfortunately, the elapsed time may be up to one\n            second less or more than you specified because of how seconds\n            are counted, and process scheduling may delay the delivery of\n            the signal even further.)\n\n</em>"}, \
+{"and","<em>    and\n    cmp\n    eq\n    ge\n    gt\n    le\n    lt\n    ne\n    not\n    or\n    x\n    xor     These operators are documented in perlop.\n\n</em>"}, \
+{"atan2","<em>    atan2 Y,X\n            Returns the arctangent of Y/X in the range -PI to PI.\n\n</em>"}, \
+{"AUTOLOAD","<em>    AUTOLOAD\n            This keyword is documented in \"Autoloading\" in perlsub.\n\n</em>"}, \
+{"BEGIN","<em>    BEGIN\n    CHECK\n    END\n    INIT\n    UNITCHECK\n            These compile phase keywords are documented in \"BEGIN,\n            UNITCHECK, CHECK, INIT and END\" in perlmod.\n\n</em>"}, \
+{"bind","<em>    bind SOCKET,NAME\n            Binds a network address to a socket, just as bind(2) does.\n            Returns true if it succeeded, false otherwise. NAME should be a\n            packed address of the appropriate type for the socket. See the\n            examples in \"Sockets: Client/Server Communication\" in perlipc.\n\n</em>"}, \
+{"binmode","<em>    binmode FILEHANDLE, LAYER\n    binmode FILEHANDLE\n            Arranges for FILEHANDLE to be read or written in \"binary\" or\n            \"text\" mode on systems where the run-time libraries distinguish\n            between binary and text files. If FILEHANDLE is an expression,\n            the value is taken as the name of the filehandle. Returns true\n            on success, otherwise it returns \"undef\" and sets $! (errno).\n\n</em>"}, \
+{"bless","<em>    bless REF,CLASSNAME\n    bless REF\n            This function tells the thingy referenced by REF that it is now\n            an object in the CLASSNAME package. If CLASSNAME is an empty\n            string, it is interpreted as referring to the \"main\" package. If\n            CLASSNAME is omitted, the current package is used. Because a\n            \"bless\" is often the last thing in a constructor, it returns the\n            reference for convenience. Always use the two-argument version\n            if a derived class might inherit the method doing the blessing.\n            See perlobj for more about the blessing (and blessings) of\n            objects.\n\n</em>"}, \
+{"break","<em>    break   Break out of a \"given\" block.\n\n</em>"}, \
+{"caller","<em>    caller EXPR\n    caller  Returns the context of the current pure perl subroutine call. In\n            scalar context, returns the caller's package name if there *is*\n            a caller (that is, if we're in a subroutine or \"eval\" or\n            \"require\") and the undefined value otherwise. caller never\n            returns XS subs and they are skipped. The next pure perl sub\n            will appear instead of the XS sub in caller's return values. In\n            list context, caller returns\n\n</em>"}, \
+{"chdir","<em>    chdir EXPR\n    chdir FILEHANDLE\n    chdir DIRHANDLE\n    chdir   Changes the working directory to EXPR, if possible. If EXPR is\n            omitted, changes to the directory specified by $ENV{HOME}, if\n            set; if not, changes to the directory specified by $ENV{LOGDIR}.\n            (Under VMS, the variable $ENV{'SYS$LOGIN'} is also checked, and\n            used if it is set.) If neither is set, \"chdir\" does nothing and\n            fails. It returns true on success, false otherwise. See the\n            example under \"die\".\n\n</em>"}, \
+{"CHECK","<em>    CHECK\n    END\n    INIT\n    UNITCHECK\n            These compile phase keywords are documented in \"BEGIN,\n            UNITCHECK, CHECK, INIT and END\" in perlmod.\n\n</em>"}, \
+{"chmod","<em>    chmod LIST\n            Changes the permissions of a list of files. The first element of\n            the list must be the numeric mode, which should probably be an\n            octal number, and which definitely should *not* be a string of\n            octal digits: 0644 is okay, but \"0644\" is not. Returns the\n            number of files successfully changed. See also \"oct\" if all you\n            have is a string.\n\n</em>"}, \
+{"chomp","<em>    chomp VARIABLE\n    chomp( LIST )\n    chomp   This safer version of \"chop\" removes any trailing string that\n            corresponds to the current value of $/ (also known as\n            $INPUT_RECORD_SEPARATOR in the \"English\" module). It returns the\n            total number of characters removed from all its arguments. It's\n            often used to remove the newline from the end of an input record\n            when you're worried that the final record may be missing its\n            newline. When in paragraph mode (\"$/ = ''\"), it removes all\n            trailing newlines from the string. When in slurp mode (\"$/ =\n            undef\") or fixed-length record mode ($/ is a reference to an\n            integer or the like; see perlvar), \"chomp\" won't remove\n            anything. If VARIABLE is omitted, it chomps $_. Example:\n\n</em>"}, \
+{"chop","<em>    chop VARIABLE\n    chop( LIST )\n    chop    Chops off the last character of a string and returns the\n            character chopped. It is much more efficient than \"s/.$//s\"\n            because it neither scans nor copies the string. If VARIABLE is\n            omitted, chops $_. If VARIABLE is a hash, it chops the hash's\n            values, but not its keys, resetting the \"each\" iterator in the\n            process.\n\n</em>"}, \
+{"chown","<em>    chown LIST\n            Changes the owner (and group) of a list of files. The first two\n            elements of the list must be the *numeric* uid and gid, in that\n            order. A value of -1 in either position is interpreted by most\n            systems to leave that value unchanged. Returns the number of\n            files successfully changed.\n\n</em>"}, \
+{"chr","<em>    chr NUMBER\n    chr     Returns the character represented by that NUMBER in the\n            character set. For example, \"chr(65)\" is \"A\" in either ASCII or\n            Unicode, and chr(0x263a) is a Unicode smiley face.\n\n</em>"}, \
+{"chroot","<em>    chroot FILENAME\n    chroot  This function works like the system call by the same name: it\n            makes the named directory the new root directory for all further\n            pathnames that begin with a \"/\" by your process and all its\n            children. (It doesn't change your current working directory,\n            which is unaffected.) For security reasons, this call is\n            restricted to the superuser. If FILENAME is omitted, does a\n            \"chroot\" to $_.\n\n</em>"}, \
+{"close","<em>    close FILEHANDLE\n    close   Closes the file or pipe associated with the filehandle, flushes\n            the IO buffers, and closes the system file descriptor. Returns\n            true if those operations succeed and if no error was reported by\n            any PerlIO layer. Closes the currently selected filehandle if\n            the argument is omitted.\n\n</em>"}, \
+{"closedir","<em>    closedir DIRHANDLE\n            Closes a directory opened by \"opendir\" and returns the success\n            of that system call.\n\n</em>"}, \
+{"cmp","<em>    cmp\n    eq\n    ge\n    gt\n    le\n    lt\n    ne\n    not\n    or\n    x\n    xor     These operators are documented in perlop.\n\n</em>"}, \
+{"connect","<em>    connect SOCKET,NAME\n            Attempts to connect to a remote socket, just like connect(2).\n            Returns true if it succeeded, false otherwise. NAME should be a\n            packed address of the appropriate type for the socket. See the\n            examples in \"Sockets: Client/Server Communication\" in perlipc.\n\n</em>"}, \
+{"continue","<em>    continue BLOCK\n    continue\n            When followed by a BLOCK, \"continue\" is actually a flow control\n            statement rather than a function. If there is a \"continue\" BLOCK\n            attached to a BLOCK (typically in a \"while\" or \"foreach\"), it is\n            always executed just before the conditional is about to be\n            evaluated again, just like the third part of a \"for\" loop in C.\n            Thus it can be used to increment a loop variable, even when the\n            loop has been continued via the \"next\" statement (which is\n            similar to the C \"continue\" statement).\n\n</em>"}, \
+{"cos","<em>    cos EXPR\n    cos     Returns the cosine of EXPR (expressed in radians). If EXPR is\n            omitted, takes the cosine of $_.\n\n</em>"}, \
+{"crypt","<em>    crypt PLAINTEXT,SALT\n            Creates a digest string exactly like the crypt(3) function in\n            the C library (assuming that you actually have a version there\n            that has not been extirpated as a potential munition).\n\n</em>"}, \
+{"__DATA__","<em>    __DATA__\n    __END__ These keywords are documented in \"Special Literals\" in perldata.\n\n</em>"}, \
+{"dbmclose","<em>    dbmclose HASH\n            [This function has been largely superseded by the \"untie\"\n            function.]\n\n</em>"}, \
+{"dbmopen","<em>    dbmopen HASH,DBNAME,MASK\n            [This function has been largely superseded by the \"tie\"\n            function.]\n\n</em>"}, \
+{"default","<em>    default\n    given\n    when    These flow-control keywords related to the experimental switch\n            feature are documented in \"Switch Statements\" in perlsyn.\n\n</em>"}, \
+{"defined","<em>    defined EXPR\n    defined Returns a Boolean value telling whether EXPR has a value other\n            than the undefined value \"undef\". If EXPR is not present, $_ is\n            checked.\n\n</em>"}, \
+{"delete","<em>    delete EXPR\n            Given an expression that specifies an element or slice of a\n            hash, \"delete\" deletes the specified elements from that hash so\n            that \"exists\" on that element no longer returns true. Setting a\n            hash element to the undefined value does not remove its key, but\n            deleting it does; see \"exists\".\n\n</em>"}, \
+{"DESTROY","<em>    DESTROY This method keyword is documented in \"Destructors\" in perlobj.\n\n</em>"}, \
+{"die","<em>    die LIST\n            \"die\" raises an exception. Inside an \"eval\" the exception is\n            stuffed into $@ and the \"eval\" is terminated with the undefined\n            value. If the exception is outside of all enclosing \"eval\"s,\n            then the uncaught exception is printed to \"STDERR\" and perl\n            exits with an exit code indicating failure. If you need to exit\n            the process with a specific exit code, see \"exit\".\n\n</em>"}, \
+{"do","<em>    do BLOCK\n            Not really a function. Returns the value of the last command in\n            the sequence of commands indicated by BLOCK. When modified by\n            the \"while\" or \"until\" loop modifier, executes the BLOCK once\n            before testing the loop condition. (On other statements the loop\n            modifiers test the conditional first.)\n\n</em>"}, \
+{"dump","<em>    dump LABEL\n    dump EXPR\n    dump    This function causes an immediate core dump. See also the -u\n            command-line switch in perlrun, which does the same thing.\n            Primarily this is so that you can use the undump program (not\n            supplied) to turn your core dump into an executable binary after\n            having initialized all your variables at the beginning of the\n            program. When the new binary is executed it will begin by\n            executing a \"goto LABEL\" (with all the restrictions that \"goto\"\n            suffers). Think of it as a goto with an intervening core dump\n            and reincarnation. If \"LABEL\" is omitted, restarts the program\n            from the top. The \"dump EXPR\" form, available starting in Perl\n            5.18.0, allows a name to be computed at run time, being\n            otherwise identical to \"dump LABEL\".\n\n</em>"}, \
+{"each","<em>    each HASH\n    each ARRAY\n            When called on a hash in list context, returns a 2-element list\n            consisting of the key and value for the next element of a hash.\n            In Perl 5.12 and later only, it will also return the index and\n            value for the next element of an array so that you can iterate\n            over it; older Perls consider this a syntax error. When called\n            in scalar context, returns only the key (not the value) in a\n            hash, or the index in an array.\n\n</em>"}, \
+{"else","<em>    else\n    elsif\n    for\n    foreach\n    if\n    unless\n    until\n    while   These flow-control keywords are documented in \"Compound\n            Statements\" in perlsyn.\n\n</em>"}, \
+{"elseif","<em>    elseif  The \"else if\" keyword is spelled \"elsif\" in Perl. There's no\n            \"elif\" or \"else if\" either. It does parse \"elseif\", but only to\n            warn you about not using it.\n\n</em>"}, \
+{"elsif","<em>    elsif\n    for\n    foreach\n    if\n    unless\n    until\n    while   These flow-control keywords are documented in \"Compound\n            Statements\" in perlsyn.\n\n</em>"}, \
+{"__END__","<em>    __END__ These keywords are documented in \"Special Literals\" in perldata.\n\n</em>"}, \
+{"END","<em>    END\n    INIT\n    UNITCHECK\n            These compile phase keywords are documented in \"BEGIN,\n            UNITCHECK, CHECK, INIT and END\" in perlmod.\n\n</em>"}, \
+{"endgrent","<em>    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"endhostent","<em>    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"endnetent","<em>    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"endprotoent","<em>    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"endpwent","<em>    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"endservent","<em>    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"eof","<em>    eof FILEHANDLE\n    eof ()\n    eof     Returns 1 if the next read on FILEHANDLE will return end of file\n            *or* if FILEHANDLE is not open. FILEHANDLE may be an expression\n            whose value gives the real filehandle. (Note that this function\n            actually reads a character and then \"ungetc\"s it, so isn't\n            useful in an interactive context.) Do not read from a terminal\n            file (or call \"eof(FILEHANDLE)\" on it) after end-of-file is\n            reached. File types such as terminals may lose the end-of-file\n            condition if you do.\n\n</em>"}, \
+{"eq","<em>    eq\n    ge\n    gt\n    le\n    lt\n    ne\n    not\n    or\n    x\n    xor     These operators are documented in perlop.\n\n</em>"}, \
+{"eval","<em>    eval EXPR\n    eval BLOCK\n    eval    \"eval\" in all its forms is used to execute a little Perl\n            program, trapping any errors encountered so they don't crash the\n            calling program.\n\n</em>"}, \
+{"evalbytes","<em>    evalbytes EXPR\n    evalbytes\n            This function is similar to a string eval, except it always\n            parses its argument (or $_ if EXPR is omitted) as a string of\n            independent bytes.\n\n</em>"}, \
+{"exec","<em>    exec LIST\n    exec PROGRAM LIST\n            The \"exec\" function executes a system command *and never\n            returns*; use \"system\" instead of \"exec\" if you want it to\n            return. It fails and returns false only if the command does not\n            exist *and* it is executed directly instead of via your system's\n            command shell (see below).\n\n</em>"}, \
+{"exists","<em>    exists EXPR\n            Given an expression that specifies an element of a hash, returns\n            true if the specified element in the hash has ever been\n            initialized, even if the corresponding value is undefined.\n\n</em>"}, \
+{"exit","<em>    exit EXPR\n    exit    Evaluates EXPR and exits immediately with that value. Example:\n\n</em>"}, \
+{"exp","<em>    exp EXPR\n    exp     Returns *e* (the natural logarithm base) to the power of EXPR.\n            If EXPR is omitted, gives \"exp($_)\".\n\n</em>"}, \
+{"fc","<em>    fc EXPR\n    fc      Returns the casefolded version of EXPR. This is the internal\n            function implementing the \"\\F\" escape in double-quoted strings.\n\n</em>"}, \
+{"fcntl","<em>    fcntl FILEHANDLE,FUNCTION,SCALAR\n            Implements the fcntl(2) function. You'll probably have to say\n\n</em>"}, \
+{"__FILE__","<em>    __FILE__\n            A special token that returns the name of the file in which it\n            occurs.\n\n</em>"}, \
+{"fileno","<em>    fileno FILEHANDLE\n    fileno DIRHANDLE\n            Returns the file descriptor for a filehandle or directory\n            handle, or undefined if the filehandle is not open. If there is\n            no real file descriptor at the OS level, as can happen with\n            filehandles connected to memory objects via \"open\" with a\n            reference for the third argument, -1 is returned.\n\n</em>"}, \
+{"flock","<em>    flock FILEHANDLE,OPERATION\n            Calls flock(2), or an emulation of it, on FILEHANDLE. Returns\n            true for success, false on failure. Produces a fatal error if\n            used on a machine that doesn't implement flock(2), fcntl(2)\n            locking, or lockf(3). \"flock\" is Perl's portable file-locking\n            interface, although it locks entire files only, not records.\n\n</em>"}, \
+{"for","<em>    for\n    foreach\n    if\n    unless\n    until\n    while   These flow-control keywords are documented in \"Compound\n            Statements\" in perlsyn.\n\n</em>"}, \
+{"foreach","<em>    foreach\n    if\n    unless\n    until\n    while   These flow-control keywords are documented in \"Compound\n            Statements\" in perlsyn.\n\n</em>"}, \
+{"fork","<em>    fork    Does a fork(2) system call to create a new process running the\n            same program at the same point. It returns the child pid to the\n            parent process, 0 to the child process, or \"undef\" if the fork\n            is unsuccessful. File descriptors (and sometimes locks on those\n            descriptors) are shared, while everything else is copied. On\n            most systems supporting fork(2), great care has gone into making\n            it extremely efficient (for example, using copy-on-write\n            technology on data pages), making it the dominant paradigm for\n            multitasking over the last few decades.\n\n</em>"}, \
+{"format","<em>    format  Declare a picture format for use by the \"write\" function. For\n            example:\n\n</em>"}, \
+{"formline","<em>    formline PICTURE,LIST\n            This is an internal function used by \"format\"s, though you may\n            call it, too. It formats (see perlform) a list of values\n            according to the contents of PICTURE, placing the output into\n            the format output accumulator, $^A (or $ACCUMULATOR in English).\n            Eventually, when a \"write\" is done, the contents of $^A are\n            written to some filehandle. You could also read $^A and then set\n            $^A back to \"\". Note that a format typically does one \"formline\"\n            per line of form, but the \"formline\" function itself doesn't\n            care how many newlines are embedded in the PICTURE. This means\n            that the \"~\" and \"~~\" tokens treat the entire PICTURE as a\n            single line. You may therefore need to use multiple formlines to\n            implement a single record format, just like the \"format\"\n            compiler.\n\n</em>"}, \
+{"ge","<em>    ge\n    gt\n    le\n    lt\n    ne\n    not\n    or\n    x\n    xor     These operators are documented in perlop.\n\n</em>"}, \
+{"getc","<em>    getc FILEHANDLE\n    getc    Returns the next character from the input file attached to\n            FILEHANDLE, or the undefined value at end of file or if there\n            was an error (in the latter case $! is set). If FILEHANDLE is\n            omitted, reads from STDIN. This is not particularly efficient.\n            However, it cannot be used by itself to fetch single characters\n            without waiting for the user to hit enter. For that, try\n            something more like:\n\n</em>"}, \
+{"getgrent","<em>    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getgrgid","<em>    getgrgid GID\n    getservbyname NAME,PROTO\n    gethostbyaddr ADDR,ADDRTYPE\n    getnetbyaddr ADDR,ADDRTYPE\n    getprotobynumber NUMBER\n    getservbyport PORT,PROTO\n    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getgrnam","<em>    getgrnam NAME\n    gethostbyname NAME\n    getnetbyname NAME\n    getprotobyname NAME\n    getpwuid UID\n    getgrgid GID\n    getservbyname NAME,PROTO\n    gethostbyaddr ADDR,ADDRTYPE\n    getnetbyaddr ADDR,ADDRTYPE\n    getprotobynumber NUMBER\n    getservbyport PORT,PROTO\n    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"gethostbyaddr","<em>    gethostbyaddr ADDR,ADDRTYPE\n    getnetbyaddr ADDR,ADDRTYPE\n    getprotobynumber NUMBER\n    getservbyport PORT,PROTO\n    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"gethostbyname","<em>    gethostbyname NAME\n    getnetbyname NAME\n    getprotobyname NAME\n    getpwuid UID\n    getgrgid GID\n    getservbyname NAME,PROTO\n    gethostbyaddr ADDR,ADDRTYPE\n    getnetbyaddr ADDR,ADDRTYPE\n    getprotobynumber NUMBER\n    getservbyport PORT,PROTO\n    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"gethostent","<em>    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getlogin","<em>    getlogin\n            This implements the C library function of the same name, which\n            on most systems returns the current login from /etc/utmp, if\n            any. If it returns the empty string, use \"getpwuid\".\n\n</em>"}, \
+{"getnetbyaddr","<em>    getnetbyaddr ADDR,ADDRTYPE\n    getprotobynumber NUMBER\n    getservbyport PORT,PROTO\n    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getnetbyname","<em>    getnetbyname NAME\n    getprotobyname NAME\n    getpwuid UID\n    getgrgid GID\n    getservbyname NAME,PROTO\n    gethostbyaddr ADDR,ADDRTYPE\n    getnetbyaddr ADDR,ADDRTYPE\n    getprotobynumber NUMBER\n    getservbyport PORT,PROTO\n    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getnetent","<em>    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getpeername","<em>    getpeername SOCKET\n            Returns the packed sockaddr address of the other end of the\n            SOCKET connection.\n\n</em>"}, \
+{"getpgrp","<em>    getpgrp PID\n            Returns the current process group for the specified PID. Use a\n            PID of 0 to get the current process group for the current\n            process. Will raise an exception if used on a machine that\n            doesn't implement getpgrp(2). If PID is omitted, returns the\n            process group of the current process. Note that the POSIX\n            version of \"getpgrp\" does not accept a PID argument, so only\n            \"PID==0\" is truly portable.\n\n</em>"}, \
+{"getppid","<em>    getppid Returns the process id of the parent process.\n\n</em>"}, \
+{"getpriority","<em>    getpriority WHICH,WHO\n            Returns the current priority for a process, a process group, or\n            a user. (See getpriority(2).) Will raise a fatal exception if\n            used on a machine that doesn't implement getpriority(2).\n\n</em>"}, \
+{"getprotobyname","<em>    getprotobyname NAME\n    getpwuid UID\n    getgrgid GID\n    getservbyname NAME,PROTO\n    gethostbyaddr ADDR,ADDRTYPE\n    getnetbyaddr ADDR,ADDRTYPE\n    getprotobynumber NUMBER\n    getservbyport PORT,PROTO\n    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getprotobynumber","<em>    getprotobynumber NUMBER\n    getservbyport PORT,PROTO\n    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getprotoent","<em>    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getpwent","<em>    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getpwnam","<em>    getpwnam NAME\n    getgrnam NAME\n    gethostbyname NAME\n    getnetbyname NAME\n    getprotobyname NAME\n    getpwuid UID\n    getgrgid GID\n    getservbyname NAME,PROTO\n    gethostbyaddr ADDR,ADDRTYPE\n    getnetbyaddr ADDR,ADDRTYPE\n    getprotobynumber NUMBER\n    getservbyport PORT,PROTO\n    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getpwuid","<em>    getpwuid UID\n    getgrgid GID\n    getservbyname NAME,PROTO\n    gethostbyaddr ADDR,ADDRTYPE\n    getnetbyaddr ADDR,ADDRTYPE\n    getprotobynumber NUMBER\n    getservbyport PORT,PROTO\n    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getservbyname","<em>    getservbyname NAME,PROTO\n    gethostbyaddr ADDR,ADDRTYPE\n    getnetbyaddr ADDR,ADDRTYPE\n    getprotobynumber NUMBER\n    getservbyport PORT,PROTO\n    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getservbyport","<em>    getservbyport PORT,PROTO\n    getpwent\n    getgrent\n    gethostent\n    getnetent\n    getprotoent\n    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getservent","<em>    getservent\n    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"getsockname","<em>    getsockname SOCKET\n            Returns the packed sockaddr address of this end of the SOCKET\n            connection, in case you don't know the address because you have\n            several different IPs that the connection might have come in on.\n\n</em>"}, \
+{"getsockopt","<em>    getsockopt SOCKET,LEVEL,OPTNAME\n            Queries the option named OPTNAME associated with SOCKET at a\n            given LEVEL. Options may exist at multiple protocol levels\n            depending on the socket type, but at least the uppermost socket\n            level SOL_SOCKET (defined in the \"Socket\" module) will exist. To\n            query options at another level the protocol number of the\n            appropriate protocol controlling the option should be supplied.\n            For example, to indicate that an option is to be interpreted by\n            the TCP protocol, LEVEL should be set to the protocol number of\n            TCP, which you can get using \"getprotobyname\".\n\n</em>"}, \
+{"given","<em>    given\n    when    These flow-control keywords related to the experimental switch\n            feature are documented in \"Switch Statements\" in perlsyn.\n\n</em>"}, \
+{"glob","<em>    glob EXPR\n    glob    In list context, returns a (possibly empty) list of filename\n            expansions on the value of EXPR such as the standard Unix shell\n            /bin/csh would do. In scalar context, glob iterates through such\n            filename expansions, returning undef when the list is exhausted.\n            This is the internal function implementing the \"<*.c>\" operator,\n            but you can use it directly. If EXPR is omitted, $_ is used. The\n            \"<*.c>\" operator is discussed in more detail in \"I/O Operators\"\n            in perlop.\n\n</em>"}, \
+{"gmtime","<em>    gmtime EXPR\n    gmtime  Works just like \"localtime\" but the returned values are\n            localized for the standard Greenwich time zone.\n\n</em>"}, \
+{"goto","<em>    goto LABEL\n    goto EXPR\n    goto &NAME\n            The \"goto LABEL\" form finds the statement labeled with LABEL and\n            resumes execution there. It can't be used to get out of a block\n            or subroutine given to \"sort\". It can be used to go almost\n            anywhere else within the dynamic scope, including out of\n            subroutines, but it's usually better to use some other construct\n            such as \"last\" or \"die\". The author of Perl has never felt the\n            need to use this form of \"goto\" (in Perl, that is; C is another\n            matter). (The difference is that C does not offer named loops\n            combined with loop control. Perl does, and this replaces most\n            structured uses of \"goto\" in other languages.)\n\n</em>"}, \
+{"grep","<em>    grep BLOCK LIST\n    grep EXPR,LIST\n            This is similar in spirit to, but not the same as, grep(1) and\n            its relatives. In particular, it is not limited to using regular\n            expressions.\n\n</em>"}, \
+{"gt","<em>    gt\n    le\n    lt\n    ne\n    not\n    or\n    x\n    xor     These operators are documented in perlop.\n\n</em>"}, \
+{"hex","<em>    hex EXPR\n    hex     Interprets EXPR as a hex string and returns the corresponding\n            numeric value. If EXPR is omitted, uses $_.\n\n</em>"}, \
+{"if","<em>    if\n    unless\n    until\n    while   These flow-control keywords are documented in \"Compound\n            Statements\" in perlsyn.\n\n</em>"}, \
+{"import","<em>    import LIST\n            There is no builtin \"import\" function. It is just an ordinary\n            method (subroutine) defined (or inherited) by modules that wish\n            to export names to another module. The \"use\" function calls the\n            \"import\" method for the package used. See also \"use\", perlmod,\n            and Exporter.\n\n</em>"}, \
+{"index","<em>    index STR,SUBSTR,POSITION\n    index STR,SUBSTR\n            The index function searches for one string within another, but\n            without the wildcard-like behavior of a full regular-expression\n            pattern match. It returns the position of the first occurrence\n            of SUBSTR in STR at or after POSITION. If POSITION is omitted,\n            starts searching from the beginning of the string. POSITION\n            before the beginning of the string or after its end is treated\n            as if it were the beginning or the end, respectively. POSITION\n            and the return value are based at zero. If the substring is not\n            found, \"index\" returns -1.\n\n</em>"}, \
+{"INIT","<em>    INIT\n    UNITCHECK\n            These compile phase keywords are documented in \"BEGIN,\n            UNITCHECK, CHECK, INIT and END\" in perlmod.\n\n</em>"}, \
+{"int","<em>    int EXPR\n    int     Returns the integer portion of EXPR. If EXPR is omitted, uses\n            $_. You should not use this function for rounding: one because\n            it truncates towards 0, and two because machine representations\n            of floating-point numbers can sometimes produce counterintuitive\n            results. For example, \"int(-6.725/0.025)\" produces -268 rather\n            than the correct -269; that's because it's really more like\n            -268.99999999999994315658 instead. Usually, the \"sprintf\",\n            \"printf\", or the \"POSIX::floor\" and \"POSIX::ceil\" functions will\n            serve you better than will \"int\".\n\n</em>"}, \
+{"ioctl","<em>    ioctl FILEHANDLE,FUNCTION,SCALAR\n            Implements the ioctl(2) function. You'll probably first have to\n            say\n\n</em>"}, \
+{"join","<em>    join EXPR,LIST\n            Joins the separate strings of LIST into a single string with\n            fields separated by the value of EXPR, and returns that new\n            string. Example:\n\n</em>"}, \
+{"keys","<em>    keys HASH\n    keys ARRAY\n            Called in list context, returns a list consisting of all the\n            keys of the named hash, or in Perl 5.12 or later only, the\n            indices of an array. Perl releases prior to 5.12 will produce a\n            syntax error if you try to use an array argument. In scalar\n            context, returns the number of keys or indices.\n\n</em>"}, \
+{"kill","<em>    kill SIGNAL, LIST\n    kill SIGNAL\n            Sends a signal to a list of processes. Returns the number of\n            arguments that were successfully used to signal (which is not\n            necessarily the same as the number of processes actually killed,\n            e.g. where a process group is killed).\n\n</em>"}, \
+{"last","<em>    last LABEL\n    last EXPR\n    last    The \"last\" command is like the \"break\" statement in C (as used\n            in loops); it immediately exits the loop in question. If the\n            LABEL is omitted, the command refers to the innermost enclosing\n            loop. The \"last EXPR\" form, available starting in Perl 5.18.0,\n            allows a label name to be computed at run time, and is otherwise\n            identical to \"last LABEL\". The \"continue\" block, if any, is not\n            executed:\n\n</em>"}, \
+{"lc","<em>    lc EXPR\n    lc      Returns a lowercased version of EXPR. This is the internal\n            function implementing the \"\\L\" escape in double-quoted strings.\n\n</em>"}, \
+{"lcfirst","<em>    lcfirst EXPR\n    lcfirst Returns the value of EXPR with the first character lowercased.\n            This is the internal function implementing the \"\\l\" escape in\n            double-quoted strings.\n\n</em>"}, \
+{"le","<em>    le\n    lt\n    ne\n    not\n    or\n    x\n    xor     These operators are documented in perlop.\n\n</em>"}, \
+{"length","<em>    length EXPR\n    length  Returns the length in *characters* of the value of EXPR. If EXPR\n            is omitted, returns the length of $_. If EXPR is undefined,\n            returns \"undef\".\n\n</em>"}, \
+{"__LINE__","<em>    __LINE__\n            A special token that compiles to the current line number.\n\n</em>"}, \
+{"link","<em>    link OLDFILE,NEWFILE\n            Creates a new filename linked to the old filename. Returns true\n            for success, false otherwise.\n\n</em>"}, \
+{"listen","<em>    listen SOCKET,QUEUESIZE\n            Does the same thing that the listen(2) system call does. Returns\n            true if it succeeded, false otherwise. See the example in\n            \"Sockets: Client/Server Communication\" in perlipc.\n\n</em>"}, \
+{"local","<em>    local EXPR\n            You really probably want to be using \"my\" instead, because\n            \"local\" isn't what most people think of as \"local\". See \"Private\n            Variables via my()\" in perlsub for details.\n\n</em>"}, \
+{"localtime","<em>    localtime EXPR\n    localtime\n            Converts a time as returned by the time function to a 9-element\n            list with the time analyzed for the local time zone. Typically\n            used as follows:\n\n</em>"}, \
+{"lock","<em>    lock THING\n            This function places an advisory lock on a shared variable or\n            referenced object contained in *THING* until the lock goes out\n            of scope.\n\n</em>"}, \
+{"log","<em>    log EXPR\n    log     Returns the natural logarithm (base *e*) of EXPR. If EXPR is\n            omitted, returns the log of $_. To get the log of another base,\n            use basic algebra: The base-N log of a number is equal to the\n            natural log of that number divided by the natural log of N. For\n            example:\n\n</em>"}, \
+{"lstat","<em>    lstat FILEHANDLE\n    lstat EXPR\n    lstat DIRHANDLE\n    lstat   Does the same thing as the \"stat\" function (including setting\n            the special \"_\" filehandle) but stats a symbolic link instead of\n            the file the symbolic link points to. If symbolic links are\n            unimplemented on your system, a normal \"stat\" is done. For much\n            more detailed information, please see the documentation for\n            \"stat\".\n\n</em>"}, \
+{"lt","<em>    lt\n    ne\n    not\n    or\n    x\n    xor     These operators are documented in perlop.\n\n</em>"}, \
+{"m","<em>    \"m/*PATTERN*/msixpodualngc\"\n            Searches a string for a pattern match, and in scalar context\n            returns true if it succeeds, false if it fails. If no string is\n            specified via the \"=~\" or \"!~\" operator, the $_ string is\n            searched. (The string specified with \"=~\" need not be an\n            lvalue--it may be the result of an expression evaluation, but\n            remember the \"=~\" binds rather tightly.) See also perlre.\n\n</em>"}, \
+{"map","<em>    map BLOCK LIST\n    map EXPR,LIST\n            Evaluates the BLOCK or EXPR for each element of LIST (locally\n            setting $_ to each element) and composes a list of the results\n            of each such evaluation. Each element of LIST may produce zero,\n            one, or more elements in the generated list, so the number of\n            elements in the generated list may differ from that in LIST. In\n            scalar context, returns the total number of elements so\n            generated. In list context, returns the generated list.\n\n</em>"}, \
+{"mkdir","<em>    mkdir FILENAME,MODE\n    mkdir FILENAME\n    mkdir   Creates the directory specified by FILENAME, with permissions\n            specified by MODE (as modified by \"umask\"). If it succeeds it\n            returns true; otherwise it returns false and sets $! (errno).\n            MODE defaults to 0777 if omitted, and FILENAME defaults to $_ if\n            omitted.\n\n</em>"}, \
+{"msgctl","<em>    msgctl ID,CMD,ARG\n            Calls the System V IPC function msgctl(2). You'll probably have\n            to say\n\n</em>"}, \
+{"msgget","<em>    msgget KEY,FLAGS\n            Calls the System V IPC function msgget(2). Returns the message\n            queue id, or \"undef\" on error. See also \"SysV IPC\" in perlipc\n            and the documentation for \"IPC::SysV\" and \"IPC::Msg\".\n\n</em>"}, \
+{"msgrcv","<em>    msgrcv ID,VAR,SIZE,TYPE,FLAGS\n            Calls the System V IPC function msgrcv to receive a message from\n            message queue ID into variable VAR with a maximum message size\n            of SIZE. Note that when a message is received, the message type\n            as a native long integer will be the first thing in VAR,\n            followed by the actual message. This packing may be opened with\n            \"unpack(\"l! a*\")\". Taints the variable. Returns true if\n            successful, false on error. See also \"SysV IPC\" in perlipc and\n            the documentation for \"IPC::SysV\" and \"IPC::Msg\".\n\n</em>"}, \
+{"msgsnd","<em>    msgsnd ID,MSG,FLAGS\n            Calls the System V IPC function msgsnd to send the message MSG\n            to the message queue ID. MSG must begin with the native long\n            integer message type, be followed by the length of the actual\n            message, and then finally the message itself. This kind of\n            packing can be achieved with \"pack(\"l! a*\", $type, $message)\".\n            Returns true if successful, false on error. See also \"SysV IPC\"\n            in perlipc and the documentation for \"IPC::SysV\" and \"IPC::Msg\".\n\n</em>"}, \
+{"my","<em>    my VARLIST\n    my TYPE VARLIST\n    my VARLIST : ATTRS\n    my TYPE VARLIST : ATTRS\n            A \"my\" declares the listed variables to be local (lexically) to\n            the enclosing block, file, or \"eval\". If more than one variable\n            is listed, the list must be placed in parentheses.\n\n</em>"}, \
+{"ne","<em>    ne\n    not\n    or\n    x\n    xor     These operators are documented in perlop.\n\n</em>"}, \
+{"next","<em>    next LABEL\n    next EXPR\n    next    The \"next\" command is like the \"continue\" statement in C; it\n            starts the next iteration of the loop:\n\n</em>"}, \
+{"no","<em>    no MODULE VERSION LIST\n    no MODULE VERSION\n    no MODULE LIST\n    no MODULE\n    no VERSION\n            See the \"use\" function, of which \"no\" is the opposite.\n\n</em>"}, \
+{"not","<em>    not\n    or\n    x\n    xor     These operators are documented in perlop.\n\n</em>"}, \
+{"oct","<em>    oct EXPR\n    oct     Interprets EXPR as an octal string and returns the corresponding\n            value. (If EXPR happens to start off with \"0x\", interprets it as\n            a hex string. If EXPR starts off with \"0b\", it is interpreted as\n            a binary string. Leading whitespace is ignored in all three\n            cases.) The following will handle decimal, binary, octal, and\n            hex in standard Perl notation:\n\n</em>"}, \
+{"open","<em>    open FILEHANDLE,EXPR\n    open FILEHANDLE,MODE,EXPR\n    open FILEHANDLE,MODE,EXPR,LIST\n    open FILEHANDLE,MODE,REFERENCE\n    open FILEHANDLE\n            Opens the file whose filename is given by EXPR, and associates\n            it with FILEHANDLE.\n\n</em>"}, \
+{"opendir","<em>    opendir DIRHANDLE,EXPR\n            Opens a directory named EXPR for processing by \"readdir\",\n            \"telldir\", \"seekdir\", \"rewinddir\", and \"closedir\". Returns true\n            if successful. DIRHANDLE may be an expression whose value can be\n            used as an indirect dirhandle, usually the real dirhandle name.\n            If DIRHANDLE is an undefined scalar variable (or array or hash\n            element), the variable is assigned a reference to a new\n            anonymous dirhandle; that is, it's autovivified. Dirhandles are\n            the same objects as filehandles; an I/O object can only be open\n            as one of these handle types at once.\n\n</em>"}, \
+{"or","<em>    or\n    x\n    xor     These operators are documented in perlop.\n\n</em>"}, \
+{"ord","<em>    ord EXPR\n    ord     Returns the numeric value of the first character of EXPR. If\n            EXPR is an empty string, returns 0. If EXPR is omitted, uses $_.\n            (Note *character*, not byte.)\n\n</em>"}, \
+{"our","<em>    our VARLIST\n    our TYPE VARLIST\n    our VARLIST : ATTRS\n    our TYPE VARLIST : ATTRS\n            \"our\" makes a lexical alias to a package (i.e. global) variable\n            of the same name in the current package for use within the\n            current lexical scope.\n\n</em>"}, \
+{"pack","<em>    pack TEMPLATE,LIST\n            Takes a LIST of values and converts it into a string using the\n            rules given by the TEMPLATE. The resulting string is the\n            concatenation of the converted values. Typically, each converted\n            value looks like its machine-level representation. For example,\n            on 32-bit machines an integer may be represented by a sequence\n            of 4 bytes, which will in Perl be presented as a string that's 4\n            characters long.\n\n</em>"}, \
+{"package","<em>    package NAMESPACE\n    package NAMESPACE VERSION\n    package NAMESPACE BLOCK\n    package NAMESPACE VERSION BLOCK\n            Declares the BLOCK or the rest of the compilation unit as being\n            in the given namespace. The scope of the package declaration is\n            either the supplied code BLOCK or, in the absence of a BLOCK,\n            from the declaration itself through the end of current scope\n            (the enclosing block, file, or \"eval\"). That is, the forms\n            without a BLOCK are operative through the end of the current\n            scope, just like the \"my\", \"state\", and \"our\" operators. All\n            unqualified dynamic identifiers in this scope will be in the\n            given namespace, except where overridden by another \"package\"\n            declaration or when they're one of the special identifiers that\n            qualify into \"main::\", like \"STDOUT\", \"ARGV\", \"ENV\", and the\n            punctuation variables.\n\n</em>"}, \
+{"__PACKAGE__","<em>    __PACKAGE__\n            A special token that returns the name of the package in which it\n            occurs.\n\n</em>"}, \
+{"pipe","<em>    pipe READHANDLE,WRITEHANDLE\n            Opens a pair of connected pipes like the corresponding system\n            call. Note that if you set up a loop of piped processes,\n            deadlock can occur unless you are very careful. In addition,\n            note that Perl's pipes use IO buffering, so you may need to set\n            $| to flush your WRITEHANDLE after each command, depending on\n            the application.\n\n</em>"}, \
+{"pop","<em>    pop ARRAY\n    pop     Pops and returns the last value of the array, shortening the\n            array by one element.\n\n</em>"}, \
+{"pos","<em>    pos SCALAR\n    pos     Returns the offset of where the last \"m//g\" search left off for\n            the variable in question ($_ is used when the variable is not\n            specified). This offset is in characters unless the\n            (no-longer-recommended) \"use bytes\" pragma is in effect, in\n            which case the offset is in bytes. Note that 0 is a valid match\n            offset. \"undef\" indicates that the search position is reset\n            (usually due to match failure, but can also be because no match\n            has yet been run on the scalar).\n\n</em>"}, \
+{"print","<em>    print FILEHANDLE LIST\n    print FILEHANDLE\n    print LIST\n    print   Prints a string or a list of strings. Returns true if\n            successful. FILEHANDLE may be a scalar variable containing the\n            name of or a reference to the filehandle, thus introducing one\n            level of indirection. (NOTE: If FILEHANDLE is a variable and the\n            next token is a term, it may be misinterpreted as an operator\n            unless you interpose a \"+\" or put parentheses around the\n            arguments.) If FILEHANDLE is omitted, prints to the last\n            selected (see \"select\") output handle. If LIST is omitted,\n            prints $_ to the currently selected output handle. To use\n            FILEHANDLE alone to print the content of $_ to it, you must use\n            a bareword filehandle like \"FH\", not an indirect one like $fh.\n            To set the default output handle to something other than STDOUT,\n            use the select operation.\n\n</em>"}, \
+{"printf","<em>    printf FILEHANDLE FORMAT, LIST\n    printf FILEHANDLE\n    printf FORMAT, LIST\n    printf  Equivalent to \"print FILEHANDLE sprintf(FORMAT, LIST)\", except\n            that $\\ (the output record separator) is not appended. The\n            FORMAT and the LIST are actually parsed as a single list. The\n            first argument of the list will be interpreted as the \"printf\"\n            format. This means that \"printf(@_)\" will use $_[0] as the\n            format. See sprintf for an explanation of the format argument.\n            If \"use locale\" (including \"use locale ':not_characters'\") is in\n            effect and \"POSIX::setlocale\" has been called, the character\n            used for the decimal separator in formatted floating-point\n            numbers is affected by the \"LC_NUMERIC\" locale setting. See\n            perllocale and POSIX.\n\n</em>"}, \
+{"prototype","<em>    prototype FUNCTION\n    prototype\n            Returns the prototype of a function as a string (or \"undef\" if\n            the function has no prototype). FUNCTION is a reference to, or\n            the name of, the function whose prototype you want to retrieve.\n            If FUNCTION is omitted, $_ is used.\n\n</em>"}, \
+{"push","<em>    push ARRAY,LIST\n            Treats ARRAY as a stack by appending the values of LIST to the\n            end of ARRAY. The length of ARRAY increases by the length of\n            LIST. Has the same effect as\n\n</em>"}, \
+{"q","<em>    \"q/*STRING*/\"\n            A single-quoted, literal string. A backslash represents a\n            backslash unless followed by the delimiter or another backslash,\n            in which case the delimiter or backslash is interpolated.\n\n</em>"}, \
+{"qq","<em>    \"qq/*STRING*/\"\n            A double-quoted, interpolated string.\n\n</em>"}, \
+{"qr","<em>    \"qr/*STRING*/msixpodualn\"\n            This operator quotes (and possibly compiles) its *STRING* as a\n            regular expression. *STRING* is interpolated the same way as\n            *PATTERN* in \"m/*PATTERN*/\". If \"'\" is used as the delimiter, no\n            variable interpolation is done. Returns a Perl value which may\n            be used instead of the corresponding \"/*STRING*/msixpodualn\"\n            expression. The returned value is a normalized version of the\n            original pattern. It magically differs from a string containing\n            the same characters: \"ref(qr/x/)\" returns \"Regexp\"; however,\n            dereferencing it is not well defined (you currently get the\n            normalized version of the original pattern, but this may\n            change).\n\n</em>"}, \
+{"quotemeta","<em>    quotemeta EXPR\n    quotemeta\n            Returns the value of EXPR with all the ASCII non-\"word\"\n            characters backslashed. (That is, all ASCII characters not\n            matching \"/[A-Za-z_0-9]/\" will be preceded by a backslash in the\n            returned string, regardless of any locale settings.) This is the\n            internal function implementing the \"\\Q\" escape in double-quoted\n            strings. (See below for the behavior on non-ASCII code points.)\n\n</em>"}, \
+{"qw","<em>    \"qw/*STRING*/\"\n            Evaluates to a list of the words extracted out of *STRING*,\n            using embedded whitespace as the word delimiters. It can be\n            understood as being roughly equivalent to:\n\n</em>"}, \
+{"qx","<em>    \"qx/*STRING*/\"\n            A string which is (possibly) interpolated and then executed as a\n            system command with /bin/sh or its equivalent. Shell wildcards,\n            pipes, and redirections will be honored. The collected standard\n            output of the command is returned; standard error is unaffected.\n            In scalar context, it comes back as a single (potentially\n            multi-line) string, or \"undef\" if the command failed. In list\n            context, returns a list of lines (however you've defined lines\n            with $/ or $INPUT_RECORD_SEPARATOR), or an empty list if the\n            command failed.\n\n</em>"}, \
+{"rand","<em>    rand EXPR\n    rand    Returns a random fractional number greater than or equal to 0\n            and less than the value of EXPR. (EXPR should be positive.) If\n            EXPR is omitted, the value 1 is used. Currently EXPR with the\n            value 0 is also special-cased as 1 (this was undocumented before\n            Perl 5.8.0 and is subject to change in future versions of Perl).\n            Automatically calls \"srand\" unless \"srand\" has already been\n            called. See also \"srand\".\n\n</em>"}, \
+{"read","<em>    read FILEHANDLE,SCALAR,LENGTH,OFFSET\n    read FILEHANDLE,SCALAR,LENGTH\n            Attempts to read LENGTH *characters* of data into variable\n            SCALAR from the specified FILEHANDLE. Returns the number of\n            characters actually read, 0 at end of file, or undef if there\n            was an error (in the latter case $! is also set). SCALAR will be\n            grown or shrunk so that the last character actually read is the\n            last character of the scalar after the read.\n\n</em>"}, \
+{"readdir","<em>    readdir DIRHANDLE\n            Returns the next directory entry for a directory opened by\n            \"opendir\". If used in list context, returns all the rest of the\n            entries in the directory. If there are no more entries, returns\n            the undefined value in scalar context and the empty list in list\n            context.\n\n</em>"}, \
+{"readline","<em>    readline EXPR\n    readline\n            Reads from the filehandle whose typeglob is contained in EXPR\n            (or from *ARGV if EXPR is not provided). In scalar context, each\n            call reads and returns the next line until end-of-file is\n            reached, whereupon the subsequent call returns \"undef\". In list\n            context, reads until end-of-file is reached and returns a list\n            of lines. Note that the notion of \"line\" used here is whatever\n            you may have defined with $/ (or $INPUT_RECORD_SEPARATOR in\n            English). See \"$/\" in perlvar.\n\n</em>"}, \
+{"readlink","<em>    readlink EXPR\n    readlink\n            Returns the value of a symbolic link, if symbolic links are\n            implemented. If not, raises an exception. If there is a system\n            error, returns the undefined value and sets $! (errno). If EXPR\n            is omitted, uses $_.\n\n</em>"}, \
+{"readpipe","<em>    readpipe EXPR\n    readpipe\n            EXPR is executed as a system command. The collected standard\n            output of the command is returned. In scalar context, it comes\n            back as a single (potentially multi-line) string. In list\n            context, returns a list of lines (however you've defined lines\n            with $/ (or $INPUT_RECORD_SEPARATOR in English)). This is the\n            internal function implementing the \"qx/EXPR/\" operator, but you\n            can use it directly. The \"qx/EXPR/\" operator is discussed in\n            more detail in \"I/O Operators\" in perlop. If EXPR is omitted,\n            uses $_.\n\n</em>"}, \
+{"recv","<em>    recv SOCKET,SCALAR,LENGTH,FLAGS\n            Receives a message on a socket. Attempts to receive LENGTH\n            characters of data into variable SCALAR from the specified\n            SOCKET filehandle. SCALAR will be grown or shrunk to the length\n            actually read. Takes the same flags as the system call of the\n            same name. Returns the address of the sender if SOCKET's\n            protocol supports this; returns an empty string otherwise. If\n            there's an error, returns the undefined value. This call is\n            actually implemented in terms of the recvfrom(2) system call.\n            See \"UDP: Message Passing\" in perlipc for examples.\n\n</em>"}, \
+{"redo","<em>    redo LABEL\n    redo EXPR\n    redo    The \"redo\" command restarts the loop block without evaluating\n            the conditional again. The \"continue\" block, if any, is not\n            executed. If the LABEL is omitted, the command refers to the\n            innermost enclosing loop. The \"redo EXPR\" form, available\n            starting in Perl 5.18.0, allows a label name to be computed at\n            run time, and is otherwise identical to \"redo LABEL\". Programs\n            that want to lie to themselves about what was just input\n            normally use this command:\n\n</em>"}, \
+{"ref","<em>    ref EXPR\n    ref     Examines the value of EXPR, expecting it to be a reference, and\n            returns a string giving information about the reference and the\n            type of referent. If EXPR is not specified, $_ will be used.\n\n</em>"}, \
+{"rename","<em>    rename OLDNAME,NEWNAME\n            Changes the name of a file; an existing file NEWNAME will be\n            clobbered. Returns true for success, false otherwise.\n\n</em>"}, \
+{"require","<em>    require VERSION\n    require EXPR\n    require Demands a version of Perl specified by VERSION, or demands some\n            semantics specified by EXPR or by $_ if EXPR is not supplied.\n\n</em>"}, \
+{"reset","<em>    reset EXPR\n    reset   Generally used in a \"continue\" block at the end of a loop to\n            clear variables and reset \"m?pattern?\" searches so that they\n            work again. The expression is interpreted as a list of single\n            characters (hyphens allowed for ranges). All variables and\n            arrays beginning with one of those letters are reset to their\n            pristine state. If the expression is omitted, one-match searches\n            (\"m?pattern?\") are reset to match again. Only resets variables\n            or searches in the current package. Always returns 1. Examples:\n\n</em>"}, \
+{"return","<em>    return EXPR\n    return  Returns from a subroutine, \"eval\", \"do FILE\", \"sort\" block or\n            regex eval block (but not a \"grep\" or \"map\" block) with the\n            value given in EXPR. Evaluation of EXPR may be in list, scalar,\n            or void context, depending on how the return value will be used,\n            and the context may vary from one execution to the next (see\n            \"wantarray\"). If no EXPR is given, returns an empty list in list\n            context, the undefined value in scalar context, and (of course)\n            nothing at all in void context.\n\n</em>"}, \
+{"reverse","<em>    reverse LIST\n            In list context, returns a list value consisting of the elements\n            of LIST in the opposite order. In scalar context, concatenates\n            the elements of LIST and returns a string value with all\n            characters in the opposite order.\n\n</em>"}, \
+{"rewinddir","<em>    rewinddir DIRHANDLE\n            Sets the current position to the beginning of the directory for\n            the \"readdir\" routine on DIRHANDLE.\n\n</em>"}, \
+{"rindex","<em>    rindex STR,SUBSTR,POSITION\n    rindex STR,SUBSTR\n            Works just like \"index\" except that it returns the position of\n            the *last* occurrence of SUBSTR in STR. If POSITION is\n            specified, returns the last occurrence beginning at or before\n            that position.\n\n</em>"}, \
+{"rmdir","<em>    rmdir FILENAME\n    rmdir   Deletes the directory specified by FILENAME if that directory is\n            empty. If it succeeds it returns true; otherwise it returns\n            false and sets $! (errno). If FILENAME is omitted, uses $_.\n\n</em>"}, \
+{"s","<em>    \"s/*PATTERN*/*REPLACEMENT*/msixpodualngcer\"\n            Searches a string for a pattern, and if found, replaces that\n            pattern with the replacement text and returns the number of\n            substitutions made. Otherwise it returns false (a value that is\n            both an empty string (\"\") and numeric zero (0) as described in\n            \"Relational Operators\").\n\n</em>"}, \
+{"say","<em>    say FILEHANDLE LIST\n    say FILEHANDLE\n    say LIST\n    say     Just like \"print\", but implicitly appends a newline. \"say LIST\"\n            is simply an abbreviation for \"{ local $\\ = \"\\n\"; print LIST }\".\n            To use FILEHANDLE without a LIST to print the contents of $_ to\n            it, you must use a bareword filehandle like \"FH\", not an\n            indirect one like $fh.\n\n</em>"}, \
+{"scalar","<em>    scalar EXPR\n            Forces EXPR to be interpreted in scalar context and returns the\n            value of EXPR.\n\n</em>"}, \
+{"seek","<em>    seek FILEHANDLE,POSITION,WHENCE\n            Sets FILEHANDLE's position, just like the fseek(3) call of C\n            \"stdio\". FILEHANDLE may be an expression whose value gives the\n            name of the filehandle. The values for WHENCE are 0 to set the\n            new position *in bytes* to POSITION; 1 to set it to the current\n            position plus POSITION; and 2 to set it to EOF plus POSITION,\n            typically negative. For WHENCE you may use the constants\n            \"SEEK_SET\", \"SEEK_CUR\", and \"SEEK_END\" (start of the file,\n            current position, end of the file) from the Fcntl module.\n            Returns 1 on success, false otherwise.\n\n</em>"}, \
+{"seekdir","<em>    seekdir DIRHANDLE,POS\n            Sets the current position for the \"readdir\" routine on\n            DIRHANDLE. POS must be a value returned by \"telldir\". \"seekdir\"\n            also has the same caveats about possible directory compaction as\n            the corresponding system library routine.\n\n</em>"}, \
+{"select","<em>    select FILEHANDLE\n    select  Returns the currently selected filehandle. If FILEHANDLE is\n            supplied, sets the new current default filehandle for output.\n            This has two effects: first, a \"write\" or a \"print\" without a\n            filehandle default to this FILEHANDLE. Second, references to\n            variables related to output will refer to this output channel.\n\n</em>"}, \
+{"semctl","<em>    semctl ID,SEMNUM,CMD,ARG\n            Calls the System V IPC function semctl(2). You'll probably have\n            to say\n\n</em>"}, \
+{"semget","<em>    semget KEY,NSEMS,FLAGS\n            Calls the System V IPC function semget(2). Returns the semaphore\n            id, or the undefined value on error. See also \"SysV IPC\" in\n            perlipc and the documentation for \"IPC::SysV\" and\n            \"IPC::Semaphore\".\n\n</em>"}, \
+{"semop","<em>    semop KEY,OPSTRING\n            Calls the System V IPC function semop(2) for semaphore\n            operations such as signalling and waiting. OPSTRING must be a\n            packed array of semop structures. Each semop structure can be\n            generated with \"pack(\"s!3\", $semnum, $semop, $semflag)\". The\n            length of OPSTRING implies the number of semaphore operations.\n            Returns true if successful, false on error. As an example, the\n            following code waits on semaphore $semnum of semaphore id\n            $semid:\n\n</em>"}, \
+{"send","<em>    send SOCKET,MSG,FLAGS,TO\n    send SOCKET,MSG,FLAGS\n            Sends a message on a socket. Attempts to send the scalar MSG to\n            the SOCKET filehandle. Takes the same flags as the system call\n            of the same name. On unconnected sockets, you must specify a\n            destination to *send to*, in which case it does a sendto(2)\n            syscall. Returns the number of characters sent, or the undefined\n            value on error. The sendmsg(2) syscall is currently\n            unimplemented. See \"UDP: Message Passing\" in perlipc for\n            examples.\n\n</em>"}, \
+{"setgrent","<em>    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"sethostent","<em>    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"setnetent","<em>    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"setpgrp","<em>    setpgrp PID,PGRP\n            Sets the current process group for the specified PID, 0 for the\n            current process. Raises an exception when used on a machine that\n            doesn't implement POSIX setpgid(2) or BSD setpgrp(2). If the\n            arguments are omitted, it defaults to \"0,0\". Note that the BSD\n            4.2 version of \"setpgrp\" does not accept any arguments, so only\n            \"setpgrp(0,0)\" is portable. See also \"POSIX::setsid()\".\n\n</em>"}, \
+{"setpriority","<em>    setpriority WHICH,WHO,PRIORITY\n            Sets the current priority for a process, a process group, or a\n            user. (See setpriority(2).) Raises an exception when used on a\n            machine that doesn't implement setpriority(2).\n\n</em>"}, \
+{"setprotoent","<em>    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"setpwent","<em>    setpwent\n    setgrent\n    sethostent STAYOPEN\n    setnetent STAYOPEN\n    setprotoent STAYOPEN\n    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"setservent","<em>    setservent STAYOPEN\n    endpwent\n    endgrent\n    endhostent\n    endnetent\n    endprotoent\n    endservent\n            These routines are the same as their counterparts in the system\n            C library. In list context, the return values from the various\n            get routines are as follows:\n\n</em>"}, \
+{"setsockopt","<em>    setsockopt SOCKET,LEVEL,OPTNAME,OPTVAL\n            Sets the socket option requested. Returns \"undef\" on error. Use\n            integer constants provided by the \"Socket\" module for LEVEL and\n            OPNAME. Values for LEVEL can also be obtained from\n            getprotobyname. OPTVAL might either be a packed string or an\n            integer. An integer OPTVAL is shorthand for pack(\"i\", OPTVAL).\n\n</em>"}, \
+{"shift","<em>    shift ARRAY\n    shift   Shifts the first value of the array off and returns it,\n            shortening the array by 1 and moving everything down. If there\n            are no elements in the array, returns the undefined value. If\n            ARRAY is omitted, shifts the @_ array within the lexical scope\n            of subroutines and formats, and the @ARGV array outside a\n            subroutine and also within the lexical scopes established by the\n            \"eval STRING\", \"BEGIN {}\", \"INIT {}\", \"CHECK {}\", \"UNITCHECK\n            {}\", and \"END {}\" constructs.\n\n</em>"}, \
+{"shmctl","<em>    shmctl ID,CMD,ARG\n            Calls the System V IPC function shmctl. You'll probably have to\n            say\n\n</em>"}, \
+{"shmget","<em>    shmget KEY,SIZE,FLAGS\n            Calls the System V IPC function shmget. Returns the shared\n            memory segment id, or \"undef\" on error. See also \"SysV IPC\" in\n            perlipc and the documentation for \"IPC::SysV\".\n\n</em>"}, \
+{"shmread","<em>    shmread ID,VAR,POS,SIZE\n    shmwrite ID,STRING,POS,SIZE\n            Reads or writes the System V shared memory segment ID starting\n            at position POS for size SIZE by attaching to it, copying\n            in/out, and detaching from it. When reading, VAR must be a\n            variable that will hold the data read. When writing, if STRING\n            is too long, only SIZE bytes are used; if STRING is too short,\n            nulls are written to fill out SIZE bytes. Return true if\n            successful, false on error. \"shmread\" taints the variable. See\n            also \"SysV IPC\" in perlipc and the documentation for \"IPC::SysV\"\n            and the \"IPC::Shareable\" module from CPAN.\n\n</em>"}, \
+{"shmwrite","<em>    shmwrite ID,STRING,POS,SIZE\n            Reads or writes the System V shared memory segment ID starting\n            at position POS for size SIZE by attaching to it, copying\n            in/out, and detaching from it. When reading, VAR must be a\n            variable that will hold the data read. When writing, if STRING\n            is too long, only SIZE bytes are used; if STRING is too short,\n            nulls are written to fill out SIZE bytes. Return true if\n            successful, false on error. \"shmread\" taints the variable. See\n            also \"SysV IPC\" in perlipc and the documentation for \"IPC::SysV\"\n            and the \"IPC::Shareable\" module from CPAN.\n\n</em>"}, \
+{"shutdown","<em>    shutdown SOCKET,HOW\n            Shuts down a socket connection in the manner indicated by HOW,\n            which has the same interpretation as in the syscall of the same\n            name.\n\n</em>"}, \
+{"sin","<em>    sin EXPR\n    sin     Returns the sine of EXPR (expressed in radians). If EXPR is\n            omitted, returns sine of $_.\n\n</em>"}, \
+{"sleep","<em>    sleep EXPR\n    sleep   Causes the script to sleep for (integer) EXPR seconds, or\n            forever if no argument is given. Returns the integer number of\n            seconds actually slept.\n\n</em>"}, \
+{"socket","<em>    socket SOCKET,DOMAIN,TYPE,PROTOCOL\n            Opens a socket of the specified kind and attaches it to\n            filehandle SOCKET. DOMAIN, TYPE, and PROTOCOL are specified the\n            same as for the syscall of the same name. You should \"use\n            Socket\" first to get the proper definitions imported. See the\n            examples in \"Sockets: Client/Server Communication\" in perlipc.\n\n</em>"}, \
+{"socketpair","<em>    socketpair SOCKET1,SOCKET2,DOMAIN,TYPE,PROTOCOL\n            Creates an unnamed pair of sockets in the specified domain, of\n            the specified type. DOMAIN, TYPE, and PROTOCOL are specified the\n            same as for the syscall of the same name. If unimplemented,\n            raises an exception. Returns true if successful.\n\n</em>"}, \
+{"sort","<em>    sort SUBNAME LIST\n    sort BLOCK LIST\n    sort LIST\n            In list context, this sorts the LIST and returns the sorted list\n            value. In scalar context, the behaviour of \"sort\" is undefined.\n\n</em>"}, \
+{"splice","<em>    splice ARRAY,OFFSET,LENGTH,LIST\n    splice ARRAY,OFFSET,LENGTH\n    splice ARRAY,OFFSET\n    splice ARRAY\n            Removes the elements designated by OFFSET and LENGTH from an\n            array, and replaces them with the elements of LIST, if any. In\n            list context, returns the elements removed from the array. In\n            scalar context, returns the last element removed, or \"undef\" if\n            no elements are removed. The array grows or shrinks as\n            necessary. If OFFSET is negative then it starts that far from\n            the end of the array. If LENGTH is omitted, removes everything\n            from OFFSET onward. If LENGTH is negative, removes the elements\n            from OFFSET onward except for -LENGTH elements at the end of the\n            array. If both OFFSET and LENGTH are omitted, removes\n            everything. If OFFSET is past the end of the array and a LENGTH\n            was provided, Perl issues a warning, and splices at the end of\n            the array.\n\n</em>"}, \
+{"split","<em>    split /PATTERN/,EXPR,LIMIT\n    split /PATTERN/,EXPR\n    split /PATTERN/\n    split   Splits the string EXPR into a list of strings and returns the\n            list in list context, or the size of the list in scalar context.\n            (Prior to Perl 5.11, it also overwrote @_ with the list in void\n            and scalar context. If you target old perls, beware.)\n\n</em>"}, \
+{"sprintf","<em>    sprintf FORMAT, LIST\n            Returns a string formatted by the usual \"printf\" conventions of\n            the C library function \"sprintf\". See below for more details and\n            see sprintf(3) or printf(3) on your system for an explanation of\n            the general principles.\n\n</em>"}, \
+{"sqrt","<em>    sqrt EXPR\n    sqrt    Return the positive square root of EXPR. If EXPR is omitted,\n            uses $_. Works only for non-negative operands unless you've\n            loaded the \"Math::Complex\" module.\n\n</em>"}, \
+{"srand","<em>    srand EXPR\n    srand   Sets and returns the random number seed for the \"rand\" operator.\n\n</em>"}, \
+{"stat","<em>    stat FILEHANDLE\n    stat EXPR\n    stat DIRHANDLE\n    stat    Returns a 13-element list giving the status info for a file,\n            either the file opened via FILEHANDLE or DIRHANDLE, or named by\n            EXPR. If EXPR is omitted, it stats $_ (not \"_\"!). Returns the\n            empty list if \"stat\" fails. Typically used as follows:\n\n</em>"}, \
+{"state","<em>    state VARLIST\n    state TYPE VARLIST\n    state VARLIST : ATTRS\n    state TYPE VARLIST : ATTRS\n            \"state\" declares a lexically scoped variable, just like \"my\".\n            However, those variables will never be reinitialized, contrary\n            to lexical variables that are reinitialized each time their\n            enclosing block is entered. See \"Persistent Private Variables\"\n            in perlsub for details.\n\n</em>"}, \
+{"study","<em>    study SCALAR\n    study   At this time, \"study\" does nothing. This may change in the\n            future.\n\n</em>"}, \
+{"sub","<em>    sub NAME BLOCK\n    sub NAME (PROTO) BLOCK\n    sub NAME : ATTRS BLOCK\n    sub NAME (PROTO) : ATTRS BLOCK\n            This is subroutine definition, not a real function *per se*.\n            Without a BLOCK it's just a forward declaration. Without a NAME,\n            it's an anonymous function declaration, so does return a value:\n            the CODE ref of the closure just created.\n\n</em>"}, \
+{"__SUB__","<em>    __SUB__ A special token that returns a reference to the current\n            subroutine, or \"undef\" outside of a subroutine.\n\n</em>"}, \
+{"substr","<em>    substr EXPR,OFFSET,LENGTH,REPLACEMENT\n    substr EXPR,OFFSET,LENGTH\n    substr EXPR,OFFSET\n            Extracts a substring out of EXPR and returns it. First character\n            is at offset zero. If OFFSET is negative, starts that far back\n            from the end of the string. If LENGTH is omitted, returns\n            everything through the end of the string. If LENGTH is negative,\n            leaves that many characters off the end of the string.\n\n</em>"}, \
+{"symlink","<em>    symlink OLDFILE,NEWFILE\n            Creates a new filename symbolically linked to the old filename.\n            Returns 1 for success, 0 otherwise. On systems that don't\n            support symbolic links, raises an exception. To check for that,\n            use eval:\n\n</em>"}, \
+{"syscall","<em>    syscall NUMBER, LIST\n            Calls the system call specified as the first element of the\n            list, passing the remaining elements as arguments to the system\n            call. If unimplemented, raises an exception. The arguments are\n            interpreted as follows: if a given argument is numeric, the\n            argument is passed as an int. If not, the pointer to the string\n            value is passed. You are responsible to make sure a string is\n            pre-extended long enough to receive any result that might be\n            written into a string. You can't use a string literal (or other\n            read-only string) as an argument to \"syscall\" because Perl has\n            to assume that any string pointer might be written through. If\n            your integer arguments are not literals and have never been\n            interpreted in a numeric context, you may need to add 0 to them\n            to force them to look like numbers. This emulates the \"syswrite\"\n            function (or vice versa):\n\n</em>"}, \
+{"sysopen","<em>    sysopen FILEHANDLE,FILENAME,MODE\n    sysopen FILEHANDLE,FILENAME,MODE,PERMS\n            Opens the file whose filename is given by FILENAME, and\n            associates it with FILEHANDLE. If FILEHANDLE is an expression,\n            its value is used as the real filehandle wanted; an undefined\n            scalar will be suitably autovivified. This function calls the\n            underlying operating system's open(2) function with the\n            parameters FILENAME, MODE, and PERMS.\n\n</em>"}, \
+{"sysread","<em>    sysread FILEHANDLE,SCALAR,LENGTH,OFFSET\n    sysread FILEHANDLE,SCALAR,LENGTH\n            Attempts to read LENGTH bytes of data into variable SCALAR from\n            the specified FILEHANDLE, using read(2). It bypasses buffered\n            IO, so mixing this with other kinds of reads, \"print\", \"write\",\n            \"seek\", \"tell\", or \"eof\" can cause confusion because the perlio\n            or stdio layers usually buffer data. Returns the number of bytes\n            actually read, 0 at end of file, or undef if there was an error\n            (in the latter case $! is also set). SCALAR will be grown or\n            shrunk so that the last byte actually read is the last byte of\n            the scalar after the read.\n\n</em>"}, \
+{"sysseek","<em>    sysseek FILEHANDLE,POSITION,WHENCE\n            Sets FILEHANDLE's system position *in bytes* using lseek(2).\n            FILEHANDLE may be an expression whose value gives the name of\n            the filehandle. The values for WHENCE are 0 to set the new\n            position to POSITION; 1 to set the it to the current position\n            plus POSITION; and 2 to set it to EOF plus POSITION, typically\n            negative.\n\n</em>"}, \
+{"system","<em>    system LIST\n    system PROGRAM LIST\n            Does exactly the same thing as \"exec\", except that a fork is\n            done first and the parent process waits for the child process to\n            exit. Note that argument processing varies depending on the\n            number of arguments. If there is more than one argument in LIST,\n            or if LIST is an array with more than one value, starts the\n            program given by the first element of the list with arguments\n            given by the rest of the list. If there is only one scalar\n            argument, the argument is checked for shell metacharacters, and\n            if there are any, the entire argument is passed to the system's\n            command shell for parsing (this is \"/bin/sh -c\" on Unix\n            platforms, but varies on other platforms). If there are no shell\n            metacharacters in the argument, it is split into words and\n            passed directly to \"execvp\", which is more efficient. On\n            Windows, only the \"system PROGRAM LIST\" syntax will reliably\n            avoid using the shell; \"system LIST\", even with more than one\n            element, will fall back to the shell if the first spawn fails.\n\n</em>"}, \
+{"syswrite","<em>    syswrite FILEHANDLE,SCALAR,LENGTH,OFFSET\n    syswrite FILEHANDLE,SCALAR,LENGTH\n    syswrite FILEHANDLE,SCALAR\n            Attempts to write LENGTH bytes of data from variable SCALAR to\n            the specified FILEHANDLE, using write(2). If LENGTH is not\n            specified, writes whole SCALAR. It bypasses buffered IO, so\n            mixing this with reads (other than \"sysread)\"), \"print\",\n            \"write\", \"seek\", \"tell\", or \"eof\" may cause confusion because\n            the perlio and stdio layers usually buffer data. Returns the\n            number of bytes actually written, or \"undef\" if there was an\n            error (in this case the errno variable $! is also set). If the\n            LENGTH is greater than the data available in the SCALAR after\n            the OFFSET, only as much data as is available will be written.\n\n</em>"}, \
+{"tell","<em>    tell FILEHANDLE\n    tell    Returns the current position *in bytes* for FILEHANDLE, or -1 on\n            error. FILEHANDLE may be an expression whose value gives the\n            name of the actual filehandle. If FILEHANDLE is omitted, assumes\n            the file last read.\n\n</em>"}, \
+{"telldir","<em>    telldir DIRHANDLE\n            Returns the current position of the \"readdir\" routines on\n            DIRHANDLE. Value may be given to \"seekdir\" to access a\n            particular location in a directory. \"telldir\" has the same\n            caveats about possible directory compaction as the corresponding\n            system library routine.\n\n</em>"}, \
+{"tie","<em>    tie VARIABLE,CLASSNAME,LIST\n            This function binds a variable to a package class that will\n            provide the implementation for the variable. VARIABLE is the\n            name of the variable to be enchanted. CLASSNAME is the name of a\n            class implementing objects of correct type. Any additional\n            arguments are passed to the appropriate constructor method of\n            the class (meaning \"TIESCALAR\", \"TIEHANDLE\", \"TIEARRAY\", or\n            \"TIEHASH\"). Typically these are arguments such as might be\n            passed to the dbm_open(3) function of C. The object returned by\n            the constructor is also returned by the \"tie\" function, which\n            would be useful if you want to access other methods in\n            CLASSNAME.\n\n</em>"}, \
+{"tied","<em>    tied VARIABLE\n            Returns a reference to the object underlying VARIABLE (the same\n            value that was originally returned by the \"tie\" call that bound\n            the variable to a package.) Returns the undefined value if\n            VARIABLE isn't tied to a package.\n\n</em>"}, \
+{"time","<em>    time    Returns the number of non-leap seconds since whatever time the\n            system considers to be the epoch, suitable for feeding to\n            \"gmtime\" and \"localtime\". On most systems the epoch is 00:00:00\n            UTC, January 1, 1970; a prominent exception being Mac OS Classic\n            which uses 00:00:00, January 1, 1904 in the current local time\n            zone for its epoch.\n\n</em>"}, \
+{"times","<em>    times   Returns a four-element list giving the user and system times in\n            seconds for this process and any exited children of this\n            process.\n\n</em>"}, \
+{"tr","<em>    \"tr/*SEARCHLIST*/*REPLACEMENTLIST*/cdsr\"\n            Transliterates all occurrences of the characters found in the\n            search list with the corresponding character in the replacement\n            list. It returns the number of characters replaced or deleted.\n            If no string is specified via the \"=~\" or \"!~\" operator, the $_\n            string is transliterated.\n\n</em>"}, \
+{"truncate","<em>    truncate FILEHANDLE,LENGTH\n    truncate EXPR,LENGTH\n            Truncates the file opened on FILEHANDLE, or named by EXPR, to\n            the specified length. Raises an exception if truncate isn't\n            implemented on your system. Returns true if successful, \"undef\"\n            on error.\n\n</em>"}, \
+{"uc","<em>    uc EXPR\n    uc      Returns an uppercased version of EXPR. This is the internal\n            function implementing the \"\\U\" escape in double-quoted strings.\n            It does not attempt to do titlecase mapping on initial letters.\n            See \"ucfirst\" for that.\n\n</em>"}, \
+{"ucfirst","<em>    ucfirst EXPR\n    ucfirst Returns the value of EXPR with the first character in uppercase\n            (titlecase in Unicode). This is the internal function\n            implementing the \"\\u\" escape in double-quoted strings.\n\n</em>"}, \
+{"umask","<em>    umask EXPR\n    umask   Sets the umask for the process to EXPR and returns the previous\n            value. If EXPR is omitted, merely returns the current umask.\n\n</em>"}, \
+{"undef","<em>    undef EXPR\n    undef   Undefines the value of EXPR, which must be an lvalue. Use only\n            on a scalar value, an array (using \"@\"), a hash (using \"%%\"), a\n            subroutine (using \"&\"), or a typeglob (using \"*\"). Saying \"undef\n            $hash{$key}\" will probably not do what you expect on most\n            predefined variables or DBM list values, so don't do that; see\n            \"delete\". Always returns the undefined value. You can omit the\n            EXPR, in which case nothing is undefined, but you still get an\n            undefined value that you could, for instance, return from a\n            subroutine, assign to a variable, or pass as a parameter.\n            Examples:\n\n</em>"}, \
+{"UNITCHECK","<em>    UNITCHECK\n            These compile phase keywords are documented in \"BEGIN,\n            UNITCHECK, CHECK, INIT and END\" in perlmod.\n\n</em>"}, \
+{"unless","<em>    unless\n    until\n    while   These flow-control keywords are documented in \"Compound\n            Statements\" in perlsyn.\n\n</em>"}, \
+{"unlink","<em>    unlink LIST\n    unlink  Deletes a list of files. On success, it returns the number of\n            files it successfully deleted. On failure, it returns false and\n            sets $! (errno):\n\n</em>"}, \
+{"unpack","<em>    unpack TEMPLATE,EXPR\n    unpack TEMPLATE\n            \"unpack\" does the reverse of \"pack\": it takes a string and\n            expands it out into a list of values. (In scalar context, it\n            returns merely the first value produced.)\n\n</em>"}, \
+{"unshift","<em>    unshift ARRAY,LIST\n            Does the opposite of a \"shift\". Or the opposite of a \"push\",\n            depending on how you look at it. Prepends list to the front of\n            the array and returns the new number of elements in the array.\n\n</em>"}, \
+{"untie","<em>    untie VARIABLE\n            Breaks the binding between a variable and a package. (See tie.)\n            Has no effect if the variable is not tied.\n\n</em>"}, \
+{"until","<em>    until\n    while   These flow-control keywords are documented in \"Compound\n            Statements\" in perlsyn.\n\n</em>"}, \
+{"use","<em>    use Module VERSION LIST\n    use Module VERSION\n    use Module LIST\n    use Module\n    use VERSION\n            Imports some semantics into the current package from the named\n            module, generally by aliasing certain subroutine or variable\n            names into your package. It is exactly equivalent to\n\n</em>"}, \
+{"utime","<em>    utime LIST\n            Changes the access and modification times on each file of a list\n            of files. The first two elements of the list must be the NUMERIC\n            access and modification times, in that order. Returns the number\n            of files successfully changed. The inode change time of each\n            file is set to the current time. For example, this code has the\n            same effect as the Unix touch(1) command when the files *already\n            exist* and belong to the user running the program:\n\n</em>"}, \
+{"values","<em>    values HASH\n    values ARRAY\n            In list context, returns a list consisting of all the values of\n            the named hash. In Perl 5.12 or later only, will also return a\n            list of the values of an array; prior to that release,\n            attempting to use an array argument will produce a syntax error.\n            In scalar context, returns the number of values.\n\n</em>"}, \
+{"vec","<em>    vec EXPR,OFFSET,BITS\n            Treats the string in EXPR as a bit vector made up of elements of\n            width BITS and returns the value of the element specified by\n            OFFSET as an unsigned integer. BITS therefore specifies the\n            number of bits that are reserved for each element in the bit\n            vector. This must be a power of two from 1 to 32 (or 64, if your\n            platform supports that).\n\n</em>"}, \
+{"wait","<em>    wait    Behaves like wait(2) on your system: it waits for a child\n            process to terminate and returns the pid of the deceased\n            process, or -1 if there are no child processes. The status is\n            returned in $? and \"${^CHILD_ERROR_NATIVE}\". Note that a return\n            value of -1 could mean that child processes are being\n            automatically reaped, as described in perlipc.\n\n</em>"}, \
+{"waitpid","<em>    waitpid PID,FLAGS\n            Waits for a particular child process to terminate and returns\n            the pid of the deceased process, or -1 if there is no such child\n            process. A non-blocking wait (with WNOHANG in FLAGS) can return\n            0 if there are child processes matching PID but none have\n            terminated yet. The status is returned in $? and\n            \"${^CHILD_ERROR_NATIVE}\".\n\n</em>"}, \
+{"wantarray","<em>    wantarray\n            Returns true if the context of the currently executing\n            subroutine or \"eval\" is looking for a list value. Returns false\n            if the context is looking for a scalar. Returns the undefined\n            value if the context is looking for no value (void context).\n\n</em>"}, \
+{"warn","<em>    warn LIST\n            Emits a warning, usually by printing it to \"STDERR\". \"warn\"\n            interprets its operand LIST in the same way as \"die\", but is\n            slightly different in what it defaults to when LIST is empty or\n            makes an empty string. If it is empty and $@ already contains an\n            exception value then that value is used after appending\n            \"\\t...caught\". If it is empty and $@ is also empty then the\n            string \"\"Warning: Something's wrong\"\" is used.\n\n</em>"}, \
+{"when","<em>    when    These flow-control keywords related to the experimental switch\n            feature are documented in \"Switch Statements\" in perlsyn.\n\n</em>"}, \
+{"while","<em>    while   These flow-control keywords are documented in \"Compound\n            Statements\" in perlsyn.\n\n</em>"}, \
+{"write","<em>    write FILEHANDLE\n    write EXPR\n    write   Writes a formatted record (possibly multi-line) to the specified\n            FILEHANDLE, using the format associated with that file. By\n            default the format for a file is the one having the same name as\n            the filehandle, but the format for the current output channel\n            (see the \"select\" function) may be set explicitly by assigning\n            the name of the format to the $~ variable.\n\n</em>"}, \
+{"-X","<em>    -X FILEHANDLE\n    -X EXPR\n    -X DIRHANDLE\n    -X      A file test, where X is one of the letters listed below. This\n            unary operator takes one argument, either a filename, a\n            filehandle, or a dirhandle, and tests the associated file to see\n            if something is true about it. If the argument is omitted, tests\n            $_, except for \"-t\", which tests STDIN. Unless otherwise\n            documented, it returns 1 for true and '' for false. If the file\n            doesn't exist or can't be examined, it returns \"undef\" and sets\n            $! (errno). Despite the funny names, precedence is the same as\n            any other named unary operator. The operator may be any of:\n\n</em>"}, \
+{"xor","<em>    xor     These operators are documented in perlop.\n\n</em>"}, \
+{"y","<em>    \"tr/*SEARCHLIST*/*REPLACEMENTLIST*/cdsr\"\n            Transliterates all occurrences of the characters found in the\n            search list with the corresponding character in the replacement\n            list. It returns the number of characters replaced or deleted.\n            If no string is specified via the \"=~\" or \"!~\" operator, the $_\n            string is transliterated.\n\n</em>"}, \
 };
-
-// Builtin-Functions
-static std::vector<std::string> perl_functions = {
-    "-A",               \
-    "abs",              \
-    "accept",           \
-    "alarm",            \
-    "atan2",            \
-    "AUTOLOAD",         \
-    "-b",               \
-    "-B",               \
-    "BEGIN",            \
-    "bind",             \
-    "binmode",          \
-    "bless",            \
-    "break",            \
-    "-c",               \
-    "-C",               \
-    "caller",           \
-    "chdir",            \
-    "CHECK",            \
-    "chmod",            \
-    "chomp",            \
-    "chop",             \
-    "chown",            \
-    "chr",              \
-    "chroot",           \
-    "close",            \
-    "closedir",         \
-    "connect",          \
-    "cos",              \
-    "crypt",            \
-    "-d",               \
-    "dbmclose",         \
-    "dbmopen",          \
-    "defined",          \
-    "delete",           \
-    "DESTROY",          \
-    "die",              \
-    "dump",             \
-    "-e",               \
-    "each",             \
-    "END",              \
-    "endgrent",         \
-    "endhostent",       \
-    "endnetent",        \
-    "endprotoent",      \
-    "endpwent",         \
-    "endservent",       \
-    "eof",              \
-    "eval",             \
-    "exec",             \
-    "exists",           \
-    "exit",             \
-    "-f",               \
-    "fcntl",            \
-    "fileno",           \
-    "flock",            \
-    "fork",             \
-    "format",           \
-    "formline",         \
-    "-g",               \
-    "getc",             \
-    "getgrent",         \
-    "getgrgid",         \
-    "getgrnam",         \
-    "gethostbyaddr",    \
-    "gethostbyname",    \
-    "gethostent",       \
-    "getlogin",         \
-    "getnetbyaddr",     \
-    "getnetbyname",     \
-    "getnetent",        \
-    "getpeername",      \
-    "getpgrp",          \
-    "getppid",          \
-    "getpriority",      \
-    "getprotobyname",   \
-    "getprotobynumber", \
-    "getprotoent",      \
-    "getpwent",         \
-    "getpwnam",         \
-    "getpwuid",         \
-    "getservbyname",    \
-    "getservbyport",    \
-    "getservent",       \
-    "getsockname",      \
-    "getsockopt",       \
-    "glob",             \
-    "gmtime",           \
-    "goto",             \
-    "grep",             \
-    "hex",              \
-    "index",            \
-    "INIT",             \
-    "int",              \
-    "ioctl",            \
-    "join",             \
-    "-k",               \
-    "keys",             \
-    "kill",             \
-    "-l",               \
-    "last",             \
-    "lc",               \
-    "lcfirst",          \
-    "length",           \
-    "link",             \
-    "listen",           \
-    "local",            \
-    "localtime",        \
-    "log",              \
-    "lstat",            \
-    "-M",               \
-    "map",              \
-    "mkdir",            \
-    "msgctl",           \
-    "msgget",           \
-    "msgrcv",           \
-    "msgsnd",           \
-    "my",               \
-    "next",             \
-    "not",              \
-    "-o",               \
-    "-O",               \
-    "oct",              \
-    "open",             \
-    "opendir",          \
-    "ord",              \
-    "our",              \
-    "-p",               \
-    "pack",             \
-    "pipe",             \
-    "pop",              \
-    "pos",              \
-    "print",            \
-    "printf",           \
-    "prototype",        \
-    "push",             \
-    "quotemeta",        \
-    "-r",               \
-    "-R",               \
-    "rand",             \
-    "read",             \
-    "readdir",          \
-    "readline",         \
-    "readlink",         \
-    "readpipe",         \
-    "recv",             \
-    "redo",             \
-    "ref",              \
-    "rename",           \
-    "require",          \
-    "reset",            \
-    "return",           \
-    "reverse",          \
-    "rewinddir",        \
-    "rindex",           \
-    "rmdir",            \
-    "-s",               \
-    "-S",               \
-    "say",              \
-    "scalar",           \
-    "seek",             \
-    "seekdir",          \
-    "select",           \
-    "semctl",           \
-    "semget",           \
-    "semop",            \
-    "send",             \
-    "setgrent",         \
-    "sethostent",       \
-    "setnetent",        \
-    "setpgrp",          \
-    "setpriority",      \
-    "setprotoent",      \
-    "setpwent",         \
-    "setservent",       \
-    "setsockopt",       \
-    "shift",            \
-    "shmctl",           \
-    "shmget",           \
-    "shmread",          \
-    "shmwrite",         \
-    "shutdown",         \
-    "sin",              \
-    "sleep",            \
-    "socket",           \
-    "socketpair",       \
-    "sort",             \
-    "splice",           \
-    "split",            \
-    "sprintf",          \
-    "sqrt",             \
-    "srand",            \
-    "stat",             \
-    "state",            \
-    "study",            \
-    "substr",           \
-    "symlink",          \
-    "syscall",          \
-    "sysopen",          \
-    "sysread",          \
-    "sysseek",          \
-    "system",           \
-    "syswrite",         \
-    "-t",               \
-    "-T",               \
-    "tell",             \
-    "telldir",          \
-    "tie",              \
-    "tied",             \
-    "time",             \
-    "times",            \
-    "truncate",         \
-    "-u",               \
-    "uc",               \
-    "ucfirst",          \
-    "umask",            \
-    "undef",            \
-    "UNITCHECK",        \
-    "unlink",           \
-    "unpack",           \
-    "unshift",          \
-    "untie",            \
-    "use",              \
-    "utime",            \
-    "values",           \
-    "vec",              \
-    "-w",               \
-    "-W",               \
-    "wait",             \
-    "waitpid",          \
-    "wantarray",        \
-    "warn",             \
-    "write",            \
-    "-x",               \
-    "-X",               \
-    "-z",
-};
-
-// Builtin-Syntax
-static std::vector<std::string> perl_syntax = {
-    "__DATA__",    \
-    "else",        \
-    "lock",        \
-    "qw",          \
-    "__END__",     \
-    "elsif",       \
-    "lt",          \
-    "qx",          \
-    "__FILE__",    \
-    "eq",          \
-    "m",           \
-    "s",           \
-    "__LINE__",    \
-    "exp",         \
-    "ne",          \
-    "sub",         \
-    "__PACKAGE__", \
-    "for",         \
-    "no",          \
-    "tr",          \
-    "and",         \
-    "foreach",     \
-    "or",          \
-    "unless",      \
-    "cmp",         \
-    "ge",          \
-    "package",     \
-    "until",       \
-    "continue",    \
-    "gt",          \
-    "q",           \
-    "while",       \
-    "CORE",        \
-    "if",          \
-    "qq",          \
-    "xor",         \
-    "do",          \
-    "le",          \
-    "qr",          \
-    "y",
-};
+/* @} */
 
 // Builtin-Variables.
 static std::vector<std::string> perl_variables = {
