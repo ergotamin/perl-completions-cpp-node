@@ -1,5 +1,5 @@
 #include <string>
-#include <array>
+#include <vector>
 #include <iostream>
 
 #include "nbind/api.h"
@@ -11,22 +11,22 @@
 class Perl {
 public:
 
-    static std::array<std::string, 235> functions(void)
+    static std::vector<std::string> functions(void)
     {
         return perl_functions;
     }
 
-    static std::array<std::string, 5> constants(void)
+    static std::vector<std::string> constants(void)
     {
         return perl_filehandles;
     }
 
-    static std::array<std::string, 130> variables(void)
+    static std::vector<std::string> variables(void)
     {
         return perl_variables;
     }
 
-    static std::array<std::string, 40> syntax(void)
+    static std::vector<std::string> syntax(void)
     {
         return perl_syntax;
     }
