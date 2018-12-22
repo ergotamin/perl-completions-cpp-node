@@ -1,5 +1,5 @@
 // File-Handles
-static std::Array<std::string, 5> perl_filehandles = {
+static std::array<std::string, 5> perl_filehandles = {
     "ARGV",    \
     "STDERR",  \
     "STDOUT",  \
@@ -247,7 +247,7 @@ static std::array<std::string, 235> perl_functions = {
 };
 
 // Builtin-Syntax
-static std::Array<std::string, 40> perl_syntax = {
+static std::array<std::string, 40> perl_syntax = {
     "__DATA__",    \
     "else",        \
     "lock",        \
@@ -291,7 +291,7 @@ static std::Array<std::string, 40> perl_syntax = {
 };
 
 // Builtin-Variables.
-static std::Array<std::string, 130>perl_variables = {
+static std::array<std::string, 130>perl_variables = {
     "$!",                            \
     "$^RE_TRIE_MAXBUF",              \
     "$LAST_REGEXP_CODE_RESULT",      \
