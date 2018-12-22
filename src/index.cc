@@ -37,4 +37,16 @@ NBIND_GLOBAL() {
     function(getPerlFunctions);
 }
 
+NBIND_GLOBAL() {
+    function(getPerlFileHandles);
+}
+
+NBIND_GLOBAL() {
+    function(getPerlVariables);
+}
+
+NBIND_GLOBAL() {
+    function(getPerlSyntax);
+}
+
 #endif
