@@ -4,25 +4,37 @@
 
 #include "nbind/api.h"
 
-#include "builtin_functions.hh"
+#if defined(BUILDING_NODE_EXTENSION)
 
-class Data {
-public:
+#include "perl_keywords.hh"
 
-    static std::array<std::string, 235> loadFunctions()
-    {
-#       if defined(BUILDING_NODE_EXTENSION)
-        return builtin_functions;
-#       endif
-    }
-};
+static std::array<std::string, 235> getPerlFunctions(void)
+{
+    return perl_functions;
+}
+
+static std::array<std::string, 5> getPerlFileHandles(void)
+{
+    return perl_filehandles;
+}
+
+static std::array<std::string, 130> getPerlVariables(void)
+{
+    return perl_variables;
+}
+
+static std::array<std::string, 40> getPerlSyntax(void)
+{
+    return perl_syntax;
+}
+
+
+/* !JavaScript */
 
 #include "nbind/nbind.h"
 
-#ifdef NBIND_CLASS
-
-NBIND_CLASS(Data) {
-    method(loadFunctions);
+NBIND_GLOBAL() {
+    function(getPerlFunctions);
 }
 
 #endif

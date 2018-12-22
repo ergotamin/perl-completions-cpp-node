@@ -1,7 +1,7 @@
 {
-  "name": "perl-language-server",
-  "version": "0.1.0",
-  "description": "LanguageServerInterface implementation for Perl. Nativly compiled Node-Module written in C++.",
+  "name": "perl-completions-cpp-node",
+  "version": "0.0.1",
+  "description": "CompletionProviderModule for Perl. Nativly compiled Node-Module written in C++.",
   "main": "index.js",
   "scripts": {
     "configure": "autogypi --init-gyp -r out -p nbind -s src/index.cc",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ergotamin/perl-language-server.git"
+    "url": "git+https://github.com/ergotamin/perl-completions-cpp-node.git"
   },
   "author": "ergotamin <ergotamin.source@gmail.com> (https://ergotamin.github.io/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ergotamin/perl-language-server/issues"
+    "url": "https://github.com/ergotamin/perl-completions-cpp-node/issues"
   },
-  "homepage": "https://github.com/ergotamin/perl-language-server#readme",
+  "homepage": "https://github.com/ergotamin/perl-completions-cpp-node#readme",
   "dependencies": {
     "nbind": "^0.3.15",
     "autogypi": "^0.2.2",
