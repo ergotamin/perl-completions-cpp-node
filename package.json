@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "configure": "autogypi --init-gyp -r out -p nbind -s src/index.cc",
-    "make:node": "node-gyp --target=v6.4.1 -C out configure build",
+    "make:node": "node-gyp --target=v8.14.0 -C out configure build",
     "make:types": "ndts out > index.d.ts",
     "make:all": "(npm run make:node && npm run make:types)",
     "make:install": "copyasm out .",
