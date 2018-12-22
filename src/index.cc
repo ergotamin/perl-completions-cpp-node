@@ -5,7 +5,6 @@
 
 #include "nbind/api.h"
 
-#define BUILDING_NODE_EXTENSION
 #if defined(BUILDING_NODE_EXTENSION)
 
 #include "perl_keywords.hh"
