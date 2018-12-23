@@ -1,5 +1,5 @@
 /* @{ */
-static std::vector<std::array<std::string,3> > perlfunc = {
+static std::vector<std::array<std::string,3> > functionItems = {
 { "chomp", " chomp VARIABLE  \n\n chomp( LIST )  \n\n chomp  \n\n", " remove a trailing record separator from a string  \n[more](https://learn.perl.org/docs/keywords.html)  \n\n" }, \
 { "chop", " chop VARIABLE  \n\n chop( LIST )  \n\n chop  \n\n", " remove the last character from a string  \n[more](https://learn.perl.org/docs/keywords.html)  \n\n" }, \
 { "chr", " chr NUMBER  \n\n chr  \n\n", " get character this number represents  \n[more](https://learn.perl.org/docs/keywords.html)  \n\n" }, \

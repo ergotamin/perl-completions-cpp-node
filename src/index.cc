@@ -15,12 +15,12 @@ public:
 
     static std::vector<std::array<std::string, 3> > functions(void)
     {
-        return functions;
+        return functionItems;
     }
 
     static std::vector<std::array<std::string, 3> > variables(void)
     {
-        return variables;
+        return variableItems;
     }
 };
 

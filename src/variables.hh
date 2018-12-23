@@ -1,5 +1,5 @@
 /* @{ */
-static std::vector<std::array<std::string,3> > variables = {
+static std::vector<std::array<std::string,3> > variableItems = {
 { "%!", " %OS_ERROR  \n\n %ERRNO  \n\n %!  \n\n", "\\ \\ \n[more](https://learn.perl.org/docs/keywords.html#perlvar)\\ \\ \n" }, \
 { "%+", " %{^CAPTURE}  \n\n %LAST_PAREN_MATCH  \n\n %+  \n\n", "\\ \\ \n[more](https://learn.perl.org/docs/keywords.html#perlvar)\\ \\ \n" }, \
 { "%-", " %-  \n\n", "\\ \\ \n[more](https://learn.perl.org/docs/keywords.html#perlvar)\\ \\ \n" }, \
