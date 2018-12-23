@@ -7,20 +7,20 @@
 
 #if defined(BUILDING_NODE_EXTENSION)
 
-#include "perlfunc.hh"
-#include "perlvar.hh"
+#include "functions.hh"
+#include "variables.hh"
 
 class Perl {
 public:
 
-    static std::vector<std::array<std::string, 2> > functions(void)
+    static std::vector<std::array<std::string, 3> > functions(void)
     {
-        return perlfunc;
+        return functions;
     }
 
-    static std::vector<std::array<std::string, 2> > variables(void)
+    static std::vector<std::array<std::string, 3> > variables(void)
     {
-        return perlvar;
+        return variables;
     }
 };
 
