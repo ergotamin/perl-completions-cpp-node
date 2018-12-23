@@ -40,14 +40,8 @@ PERL
   for doc in *; do
     cat - <<NODE | node -- | sed 's%":"%","%' >>../builtin_header.hh
 const fs = require("fs");
-
 const string = fs.readFileSync("$doc").toString("utf-8");
-
-const data = {
-  '$doc': "\`" + JSON.stringify(string) + "\`",
-  }
-
-console.log(JSON.stringify(data) + ", \\\");
+console.log("{ \"$doc\", "+ JSON.stringify(string) + " }, \\\");
 NODE
   done
   printf "};\n/* @} */\n" >>../builtin_header.hh

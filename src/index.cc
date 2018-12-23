@@ -7,7 +7,8 @@
 
 #if defined(BUILDING_NODE_EXTENSION)
 
-#include "perl_keywords.hh"
+#include "perl_functions.hh"
+#include "perl_variables.hh"
 
 class Perl {
 public:
