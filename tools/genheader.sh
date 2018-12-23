@@ -25,6 +25,7 @@ PERL
   mkdir -m0755 tmp \
     && for name in $(cat builtin_names); do
       perldoc -T -f $name 2>/dev/zero \
+        | sed 's%^\s*%%g' \
         | head -$(printf $(perldoc -T -f $name 2>/dev/zero \
                 | grep --line-number --max-count=1 -e '^$' \
                 | cut -d':' -f1) 2>/dev/zero) \
@@ -35,7 +36,7 @@ PERL
   unlink builtin_names
   pushd tmp &>/dev/zero \
     || exit 1
-  printf "static std::vector<std::array<std::string,2> > perlfunc = {\n" >>../builtin_header.hh
+  printf "/* @{ */\nstatic std::vector<std::array<std::string,2> > perlfunc = {\n" >>../builtin_header.hh
   for doc in *; do
     cat - <<NODE | node -- | sed 's%":"%","%' >>../builtin_header.hh
 const fs = require("fs");
@@ -43,13 +44,13 @@ const fs = require("fs");
 const string = fs.readFileSync("$doc").toString("utf-8");
 
 const data = {
-  '$doc': "<em>" + string + "</em>",
+  '$doc': "\`" + JSON.stringify(string) + "\`",
   }
 
 console.log(JSON.stringify(data) + ", \\\");
 NODE
   done
-  printf "};\n" >>../builtin_header.hh
+  printf "};\n/* @} */\n" >>../builtin_header.hh
   popd &>/dev/zero \
     || exit 1 \
     && rm -rf ./tmp

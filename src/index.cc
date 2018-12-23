@@ -14,7 +14,7 @@ public:
 
     static std::vector<std::array<std::string, 2> > functions(void)
     {
-        return perl_functions;
+        return perlfunc;
     }
 
     static std::vector<std::string> variables(void)
