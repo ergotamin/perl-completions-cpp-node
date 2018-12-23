@@ -7,8 +7,8 @@
 
 #if defined(BUILDING_NODE_EXTENSION)
 
-#include "perl_functions.hh"
-#include "perl_variables.hh"
+#include "perlfunc.hh"
+#include "perlvar.hh"
 
 class Perl {
 public:
@@ -18,9 +18,9 @@ public:
         return perlfunc;
     }
 
-    static std::vector<std::string> variables(void)
+    static std::vector<std::array<std::string, 2> > variables(void)
     {
-        return perl_variables;
+        return perlvar;
     }
 };
 

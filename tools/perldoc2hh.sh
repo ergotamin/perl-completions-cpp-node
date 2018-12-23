@@ -1,6 +1,6 @@
 #!/bin/bash
 
-make::builtin_header() {
+build:perlfunc.hh() {
   cat - <<'PERL' | perl >perlfuncs
 #!/usr/bin/perl -w
 use Pod::Find qw(pod_where);
@@ -36,18 +36,41 @@ PERL
   unlink builtin_names
   pushd tmp &>/dev/zero \
     || exit 1
-  printf "/* @{ */\nstatic std::vector<std::array<std::string,2> > perlfunc = {\n" >>../builtin_header.hh
+  printf "/* @{ */\nstatic std::vector<std::array<std::string,2> > perlfunc = {\n" >>../perlfunc.hh
   for doc in *; do
-    cat - <<NODE | node -- | sed 's%":"%","%' >>../builtin_header.hh
+    cat - <<NODE | node -- | sed 's%":"%","%' >>../perlfunc.hh
 const fs = require("fs");
 const string = fs.readFileSync("$doc").toString("utf-8");
 console.log("{ \"$doc\", "+ JSON.stringify(string) + " }, \\\");
 NODE
   done
-  printf "};\n/* @} */\n" >>../builtin_header.hh
+  printf "};\n/* @} */\n" >>../perlfunc.hh
   popd &>/dev/zero \
     || exit 1 \
     && rm -rf ./tmp
 }
 
-make::builtin_header
+build:perlvar.hh() {
+  printf "/* @{ */\nstatic std::vector<std::array<std::string,2> > perlvar = {\n" >>perlvar.hh
+  shopt -s nullglob
+  for var in $(perldoc -u -T perlvar \
+    | grep -oe '^=item.*' \
+    | sed 's%=item %%' \
+    | sort --unique); do
+    perldoc -T -v $var \
+      | sed 's%^\s*%%g' \
+      | head -$(printf $(perldoc -T -v $var 2>/dev/zero \
+                      | grep --line-number --max-count=2 -e '^$' \
+                      | cut -d':' -f1) 2>/dev/zero) >.tmp
+    cat - <<NODE | node -- | sed 's%":"%","%' >>perlvar.hh
+const fs = require("fs");
+const string = fs.readFileSync(".tmp").toString("utf-8");
+console.log("{ \"$var\", "+ JSON.stringify(""+string+"") + " }, \\\");
+NODE
+  done \
+    && shopt -u nullglob \
+    && printf "};\n/* @} */\n" >>perlvar.hh \
+    && unlink .tmp
+}
+
+build:"$1".hh
