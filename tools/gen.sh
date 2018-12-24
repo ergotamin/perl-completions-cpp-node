@@ -12,16 +12,16 @@ build:functions() {
         | grep -oe '=item .*' \
         | sed 's%=item%%g' \
         | sed 's%[CIX]<\|[>]%%g' \
-        | sed 's%^.*$%\0\ \ \n%g' >.code
+        | sed 's%^.*$%\0\ %g' >.code
       perldoc -u -T -f $name 2>/dev/zero \
         | grep -oe '=for Pod::Functions.*' \
         | sed 's%=for Pod::Functions%%g' \
-        | sed 's%.*%\0\ \ \n[more](https://learn.perl.org/docs/keywords.html)\ \ \n%' >.info
+        | sed 's%.*%\0\ %' >.info
     cat - <<NODE | node -- | sed 's%":"%","%g' >>functions.hh
 const fs = require("fs");
 const code = fs.readFileSync(".code").toString("utf-8");
 const info = fs.readFileSync(".info").toString("utf-8");
-console.log("{ \"$name\", "+ JSON.stringify(code) + ", " + JSON.stringify(info) + " }, \\\");
+console.log("{ \"$name\", " + JSON.stringify(code) + ", " + JSON.stringify(info) + " }, \\\");
 NODE
   done
   rm -f .info .code
@@ -40,13 +40,13 @@ build:variables() {
       | grep -oe '=item .*' \
       | sed 's%=item%%g' \
       | sed 's%[CIX]<\|[>]%%g' \
-      | sed 's%^.*$%\0\ \ \n%g' >.code
-    printf "\ \ \n[more](https://learn.perl.org/docs/keywords.html#perlvar)\ \ \n" >.info
+      | sed 's%^.*$%\0\ %g' >.code
+    printf "[more](https://learn.perl.org/docs/keywords.html#perlvar)\ " >.info
     cat - <<NODE | node -- | sed 's%":"%","%' >>variables.hh
 const fs = require("fs");
 const code = fs.readFileSync(".code").toString("utf-8");
 const info = fs.readFileSync(".info").toString("utf-8");
-console.log("{ \"$var\", "+ JSON.stringify(code) + ", " + JSON.stringify(info) + " }, \\\");
+console.log("{ \"$var\", " + JSON.stringify(code) + ", " + JSON.stringify(info) + " }, \\\");
 NODE
   done
   rm -f .info .code
